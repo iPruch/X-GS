@@ -23,7 +23,7 @@ As I tried to hint with the name (Game Skeleton), I want X-GS to serve more like
 So, the basic idea with regard X-GS is to provide a basic structure and some basic functionalities that doesn't come with C++/SFML that you'd have to code from scratch.
 
 
-### But C++ is old. Unity/UDK is better, so this project hasn't a point!
+### But C++ is old. Unity/UDK is better. This project has no point!
 
 On the first hand, C++ is a programming language that is constantly evolving. SFML is built with the best practices of modern C++ in mind and it uses some of the new C++11 standard features which makes it easier to use and more reliable. For example, using the RAII idiom (Resource Aquisition Is Initialization) and smart pointers make you think less of manual and error-prone memory management as it gets kind of automatic and leak-proof.
 
