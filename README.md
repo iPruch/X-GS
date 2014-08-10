@@ -4,7 +4,7 @@ X-GS (Cross-platform Game Skeleton)
 This is a brief introducction and description of what is X-GS. I'll keep updating this Readme file to clarify things, give details, instructions, motivation behind this project, etc.
 
 
-## What is X-GS?
+### What is X-GS?
 
 X-GS stands for Cross-platform Game Skeleton, which I expect to sound more like "this is a template for the core of your game" more than "this is the best game engine of all-time!".
 
@@ -15,7 +15,7 @@ The other important pilar of X-GS is SFML (Simple and Fast Multimedia Library). 
 But C++ and SFML by themselves doesn't give you a game loop, an Entity (or GameObject for Unity fans), nor a scene graph, physics, etc. A game engine has many definitions and there's a lot of discussions about what exactly is a game engine. For me, it is a collection of useful tools which helps a developer to focus on making a game as the low level details are already implemented and hidden to the user.
 
 
-## Then, is X-GS a game engine?
+### Then, is X-GS a game engine?
 
 No. Forget about Unity or UDK. I am only one person, not a big team of experienced people making an enormous software monster. Besides, it isn't my intention.
 
@@ -24,7 +24,7 @@ As I tried to hint with the name (Game Skeleton), I want X-GS to serve more like
 So, the basic idea with regard X-GS is to provide a basic structure and some basic functionalities that doesn't come with C++/SFML that you'd have to code from scratch.
 
 
-## But C++ is old. Unity/UDK is better, so this project hasn't a point!
+### But C++ is old. Unity/UDK is better, so this project hasn't a point!
 
 On the firs hand, C++ is a programming language that is constantly evolving. SFML is built with the best practices of modern C++ in mind and it uses some of the C++11 new standard features which makes it easier to use and more reliable. For example, using the RAII idiom (Resource Aquisition Is Initialization) and smart pointers make you think less of manual and error-prone memory management as it gets kind of automatic and leak-proof.
 
@@ -33,12 +33,12 @@ On the other hand, Unity/UDK/<put-your-favourite-engine-here> are truly great. I
 Of course, X-GS isn't the panacea. But it can be the starting point of your own (or the company you work for) technology. It can also be the YAGNI touch your project needs. YAGNI stands for "You Ain't Gonna Need It", which means you have to focus on what you need and forget about everything else (for now). [Here] (http://stefan.boxbox.org/2013/02/10/game-development-design-2-good-habits-techniques-and-workflows/) you have a better explanation of YAGNI and other good habits and techniques.
 
 
-## I want to download it and start making my game!
+### I want to download it and start making my game!
 
 The deadline of my end-of-degree project is due for September, so I need to finish this project asap. That said, my objective is to get the fundamental part of X-GS working before that date. After that I'd probably extend it with some functionalities, but again: please, don't expect a full-of-nice-features engine as it is not the purpose. Think YAGNI!
 
 
-## Milestones
+### Milestones
 
 If you want to see the milestones and what I'm working on, [here] (https://trello.com/b/JPZUbDz7/x-gs) is my Trello public board for this project.
 
