@@ -6,7 +6,7 @@ This is a brief introducction and description of what is X-GS. I'll keep updatin
 
 ### What is X-GS?
 
-X-GS stands for Cross-platform Game Skeleton, which I expect to sound more like "**this is a template for the core of your game**" more than "this is the best game engine of all-time!".
+X-GS stands for Cross-platform Game Skeleton, which I expect to sound like "**this is a template for the core of your game**" more than "this is the best game engine of all-time!".
 
 It is written in C++ with one idea in mind: Efficiency. C++ is known for being very efficient and for having a very robust standard library. It appeared in 1983, but it still used on a wide range of fields, specially those where every bit of performance matters (as you can guess, video games is one of these fields). I'm about to get my degree at IT, so I'm kind of newbie. I haven't learnt C++ at the University and it looks pretty difficult at first. Some C++ books after, my opinion hasn't changed. I have to practise, make mistakes and learn from them. Maybe it's hasty to get that practise doing my end-of-degree project, but I'll try. Oh, well, probably I should have started from there: Yes, **X-GS is my end-of-degree project**.
 
