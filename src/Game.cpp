@@ -3,28 +3,28 @@
 #include <SFML/Window/Event.hpp>
 
 namespace xgs {
-
-Game::Game()
-: mWindow(sf::VideoMode(640, 480), "Window Title", sf::Style::Close),
+    
+    Game::Game()
+    : mWindow(sf::VideoMode(640, 480), "Window Title", sf::Style::Close),
     mTimeSinceStart(0),
     mVSync(true)
-{
-    // Resource loading here if needed (RAII)
-    
-    mWindow.setVerticalSyncEnabled(mVSync);
-    
-    // Statistics
-    mFont.loadFromFile(/*resourcePath() + */"Sansation.ttf"); // resourcePath() method needs an implementation per platform/OS
-    mStatisticsText.setFont(mFont);
-    mStatisticsText.setPosition(5.f, 5.f);
-    mStatisticsText.setCharacterSize(14);
-    mStatisticsText.setColor(sf::Color::Green);
-}
+    {
+        // Resource loading here if needed (RAII)
+        
+        mWindow.setVerticalSyncEnabled(mVSync);
+        
+        // Statistics
+        mFont.loadFromFile(/*resourcePath() + */"Sansation.ttf"); // resourcePath() method needs an implementation per platform/OS
+        mStatisticsText.setFont(mFont);
+        mStatisticsText.setPosition(5.f, 5.f);
+        mStatisticsText.setCharacterSize(14);
+        mStatisticsText.setColor(sf::Color::Green);
+    }
     
     /*****************************************/
     /***             TIMESTEPS             ***/
     /*****************************************/
-
+    
     
     /* --------------------------
      * Basic Fixed Delta Timestep
@@ -211,7 +211,7 @@ Game::Game()
             render();
         }
     }
-
+    
     
     
     void Game::update(const HiResDuration &dt)
@@ -221,17 +221,17 @@ Game::Game()
         
         // Example:
         /*
-        for (auto &entity : entitiesContainer) {
-            
-            // Advance the simulation/physics integrating
-            // Choose Euler, RK4 or implement your own
-            Integrator::Euler(entity.state, dt);
-            //Integrator::RK4(entity.state, dt);
-            
-            // Call each entity's own update method
-            entity.update(dt);
-        }
-        */
+         for (auto &entity : entitiesContainer) {
+         
+         // Advance the simulation/physics integrating
+         // Choose Euler, RK4 or implement your own
+         Integrator::Euler(entity.state, dt);
+         //Integrator::RK4(entity.state, dt);
+         
+         // Call each entity's own update method
+         entity.update(dt);
+         }
+         */
         
     }
     
@@ -240,14 +240,14 @@ Game::Game()
         mWindow.clear();
         
         // Draw calls here
-
+        
         // Example:
         /*
-        for (auto &entity : entitiesContainer) {
-            // Call each entity's own draw method
-            entity.draw(dt);
-        }
-        */
+         for (auto &entity : entitiesContainer) {
+         // Call each entity's own draw method
+         entity.draw(dt);
+         }
+         */
         
         //mWindow.draw(mStatisticsText);
         

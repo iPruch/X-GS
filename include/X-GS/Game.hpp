@@ -18,24 +18,24 @@ namespace xgs {
         void                    runVariableDeltaTime();
         void                    runSemiFixedDeltaTime();
         void                    runFixedSimulationVariableFramerate();
-                
-	private:
-		void					update(const HiResDuration &dt);
-		void					render();
-        void                    updateStatistics(const HiResDuration &elapsedTime);
-
         
 	private:
-		sf::RenderWindow		mWindow;
+		void                    update(const HiResDuration &dt);
+		void                    render();
+        void                    updateStatistics(const HiResDuration &elapsedTime);
+        
+        
+	private:
+		sf::RenderWindow        mWindow;
         
         bool                    mVSync;
-
+        
         // Statistics
         HiResDuration           mTimeSinceStart; // Accumulator of all time
-        sf::Font				mFont;
-        sf::Text				mStatisticsText;
-        HiResDuration			mStatisticsUpdateTime;
-        std::size_t				mStatisticsNumFrames;
+        sf::Font                mFont;
+        sf::Text                mStatisticsText;
+        HiResDuration           mStatisticsUpdateTime;
+        std::size_t             mStatisticsNumFrames;
         
     };
     

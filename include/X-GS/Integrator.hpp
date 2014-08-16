@@ -33,16 +33,16 @@ namespace xgs {
     class Integrator
     {
     public:
-        void static				Euler(State &state,
-                                      const HiResDuration &dt);
-        void static             RK4(State &state,
-                                    const HiResDuration &dt);
+        void static                     Euler(State &state,
+                                              const HiResDuration &dt);
+        void static                     RK4(State &state,
+                                            const HiResDuration &dt);
         
         
     private:
-        Derivative static             evaluateRK4(const State &initial,
-                                            const HiResDuration &dt,
-                                            const Derivative &d);
+        Derivative static               evaluateRK4(const State &initial,
+                                                    const HiResDuration &dt,
+                                                    const Derivative &d);
         sf::Vector2f static             accelerationRK4(const State &state,
                                                         const HiResDuration &t);
     };

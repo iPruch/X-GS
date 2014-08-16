@@ -4,20 +4,22 @@
 namespace xgs {
     
     // Simple integrator. Accumulates error as time passes.
-    void Integrator::Euler(State &state, const HiResDuration &dt)
+    void Integrator::Euler(State &state,
+                           const HiResDuration &dt)
     {
         float dtValue = ((float)dt.count()/ONE_SECOND.count());
-
+        
         state.position = state.position + state.velocity * dtValue;
         state.velocity = state.velocity + (state.force / state.mass) * dtValue;
     }
     
     // More accurate than Euler.
     // NOTE: It behaves differently (slowly?) than Euler regarding to forces/acceleration. I believe is a bug. I'll check it later.
-    void Integrator::RK4(State &state, const HiResDuration &dt)
+    void Integrator::RK4(State &state,
+                         const HiResDuration &dt)
     {
         float dtValue = ((float)dt.count()/ONE_SECOND.count());
-
+        
         Derivative a,b,c,d;
         Derivative initial;
         
@@ -38,8 +40,8 @@ namespace xgs {
     
     // Auxiliar function for RK4 integrator
     Derivative Integrator::evaluateRK4(const State &initial,
-                        const HiResDuration &dt,
-                        const Derivative &d)
+                                       const HiResDuration &dt,
+                                       const Derivative &d)
     {
         float dtValue = ((float)dt.count()/ONE_SECOND.count());
         
@@ -56,7 +58,8 @@ namespace xgs {
     }
     
     // Auxiliar function for RK4 integrator
-    sf::Vector2f Integrator::accelerationRK4(const State &state, const HiResDuration &dt)
+    sf::Vector2f Integrator::accelerationRK4(const State &state,
+                                             const HiResDuration &dt)
     {
         float dtValue = ((float)dt.count()/ONE_SECOND.count());
         
