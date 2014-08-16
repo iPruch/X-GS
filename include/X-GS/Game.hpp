@@ -36,7 +36,6 @@ namespace xgs {
         sf::Text                mStatisticsText;
         HiResDuration           mStatisticsUpdateTime;
         std::size_t             mStatisticsNumFrames;
-        
     };
     
 } // namespace xgs
