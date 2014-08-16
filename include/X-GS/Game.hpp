@@ -12,7 +12,7 @@ namespace xgs {
     
     class Game : private sf::NonCopyable
     {
-	public:
+    public:
         Game();
         void                    runFixedDeltaTime();
         void                    runVariableDeltaTime();
@@ -20,13 +20,13 @@ namespace xgs {
         void                    runFixedSimulationVariableFramerate();
         
 	private:
-		void                    update(const HiResDuration &dt);
-		void                    render();
+        void                    update(const HiResDuration &dt);
+        void                    render();
         void                    updateStatistics(const HiResDuration &elapsedTime);
         
         
 	private:
-		sf::RenderWindow        mWindow;
+        sf::RenderWindow        mWindow;
         
         bool                    mVSync;
         
