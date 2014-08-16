@@ -43,8 +43,7 @@ namespace xgs {
         Derivative static               evaluateRK4(const State &initial,
                                                     const HiResDuration &dt,
                                                     const Derivative &d);
-        sf::Vector2f static             accelerationRK4(const State &state,
-                                                        const HiResDuration &t);
+        sf::Vector2f static             accelerationRK4(const State &state);
     };
     
 } // namespace xgs

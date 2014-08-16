@@ -53,17 +53,14 @@ namespace xgs {
         
         Derivative output;
         output.dp = state.velocity;
-        output.dv = accelerationRK4(state, dt);
+        output.dv = accelerationRK4(state);
         return output;
     }
     
     // Auxiliar function for RK4 integrator
-    sf::Vector2f Integrator::accelerationRK4(const State &state,
-                                             const HiResDuration &dt)
+    sf::Vector2f Integrator::accelerationRK4(const State &state)
     {
-        float dtValue = ((float)dt.count()/ONE_SECOND.count());
-        
-        return state.force / state.mass * dtValue;
+        return state.force / state.mass;
     }
     
 } // namespace xgs

@@ -7,6 +7,8 @@ namespace xgs {
     Game::Game()
     : mWindow(sf::VideoMode(640, 480), "Window Title", sf::Style::Close),
     mTimeSinceStart(0),
+	mStatisticsNumFrames(0),
+	mStatisticsUpdateTime(0),
     mVSync(true)
     {
         // Resource loading here if needed (RAII)
