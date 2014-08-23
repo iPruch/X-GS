@@ -1,28 +1,118 @@
 #include <X-GS/Game.hpp>
 
-#include <SFML/Window/Event.hpp>
+#include "ResourcePath.hpp" // Not provided with X-GS. 
 
 namespace xgs {
     
+	// Constructor
     Game::Game()
-    : mWindow(sf::VideoMode(640, 480), "Window Title", sf::Style::Close),
-    mTimeSinceStart(0),
-	mStatisticsNumFrames(0),
-	mStatisticsUpdateTime(0),
-    mVSync(true)
+    : mWindow(sf::VideoMode(200, 200), "Window Title", sf::Style::Close)
+	, mTimeSinceStart(0)
+	, mStatisticsNumFrames(0)
+	, mStatisticsUpdateTime(0)
+	, mVSync(true)
+	, mSceneManager(mWindow)
     {
         // Resource loading here if needed (RAII)
-        
+		
+		// Set some mWindow's properties
         mWindow.setVerticalSyncEnabled(mVSync);
-        
+		mWindow.setKeyRepeatEnabled(false); // Disable key repeat when holding a key as this behavior is unwanted for games
+		sf::View view = mWindow.getView();
+		view.setViewport(sf::FloatRect(0.f, 0.f, 1.f, 1.f));
+		//mWindow.setView(view);
+		
         // Statistics
-        mFont.loadFromFile(/*resourcePath() + */"Sansation.ttf"); // resourcePath() method needs an implementation per platform/OS
+        mFont.loadFromFile(resourcePath() + "Sansation.ttf"); // resourcePath() method needs an implementation per platform/OS
         mStatisticsText.setFont(mFont);
         mStatisticsText.setPosition(5.f, 5.f);
         mStatisticsText.setCharacterSize(14);
         mStatisticsText.setColor(sf::Color::Green);
+		
+		// Register the example scenes in the Scene Manager
+		mSceneManager.registerScene<ExampleScene>(Scenes::Example);
+		mSceneManager.registerScene<ExampleScene2>(Scenes::Example2);
+		
+		// And load the first one
+		mSceneManager.loadScene(Scenes::Example);
     }
     
+	
+	
+    void Game::update(const HiResDuration& dt)
+    {
+        
+        // Update calls here
+        
+        // Example:
+        /*
+         for (auto &entity : entitiesContainer) {
+         
+         // Advance the simulation/physics integrating
+         // Choose Euler, RK4 or implement your own
+         Integrator::Euler(entity.state, dt);
+         //Integrator::RK4(entity.state, dt);
+         
+         // Call each entity's own update method
+         entity.update(dt);
+         }
+		 
+		 NOTE:
+		 The recommended approach is to ask the Scene Manager to update
+		 itself, which will invoke the current scene's update method.
+		 This is the default implementation:
+         */
+		
+		mSceneManager.update(dt);
+        
+    }
+    
+    void Game::render()
+    {
+        mWindow.clear();
+        
+        // Draw calls here
+        
+        // Example:
+        /*
+         for (auto &entity : entitiesContainer) {
+         // Call each entity's own draw method
+         entity.draw(dt);
+         }
+		 
+		 NOTE:
+		 The recommended approach is to ask the Scene Manager to render
+		 itself, which will invoke the current scene's render method.
+		 This is the default implementation:
+         */
+
+        mSceneManager.render();
+
+		mWindow.draw(mStatisticsText); // Comment this line to hide statistics
+		
+        mWindow.display();
+    }
+    
+    void Game::updateStatistics(const HiResDuration& elapsedTime)
+    {
+        mStatisticsUpdateTime += elapsedTime;
+        mStatisticsNumFrames += 1;
+        
+        if (mStatisticsUpdateTime >= ONE_SECOND)
+        {
+            mStatisticsText.setString(
+                                      "Frames / Second = " + std::to_string(mStatisticsNumFrames) + "\n" +
+                                      "Time / Update = " + std::to_string((float)mStatisticsUpdateTime.count()/mStatisticsNumFrames/1000000) + "ms" + "\n"
+                                      + "V-Sync enabled: " + (mVSync ? "Yes" : "No") + "\n"
+                                      + "Number of objects: To be implemented"); // + toString(entitiesContainer.count()));
+            
+            mStatisticsUpdateTime -= ONE_SECOND;
+            mStatisticsNumFrames = 0;
+        }
+    }
+
+	
+	
     /*****************************************/
     /***             TIMESTEPS             ***/
     /*****************************************/
@@ -107,6 +197,7 @@ namespace xgs {
     }
     
     
+	
     
     /* -------------------------
      * Semi Fixed Delta Timestep
@@ -213,65 +304,4 @@ namespace xgs {
             render();
         }
     }
-    
-    
-    
-    void Game::update(const HiResDuration &dt)
-    {
-        
-        // Update calls here
-        
-        // Example:
-        /*
-         for (auto &entity : entitiesContainer) {
-         
-         // Advance the simulation/physics integrating
-         // Choose Euler, RK4 or implement your own
-         Integrator::Euler(entity.state, dt);
-         //Integrator::RK4(entity.state, dt);
-         
-         // Call each entity's own update method
-         entity.update(dt);
-         }
-         */
-        
-    }
-    
-    void Game::render()
-    {
-        mWindow.clear();
-        
-        // Draw calls here
-        
-        // Example:
-        /*
-         for (auto &entity : entitiesContainer) {
-         // Call each entity's own draw method
-         entity.draw(dt);
-         }
-         */
-        
-        //mWindow.draw(mStatisticsText);
-        
-        mWindow.display();
-    }
-    
-    void Game::updateStatistics(const HiResDuration &elapsedTime)
-    {
-        mStatisticsUpdateTime += elapsedTime;
-        mStatisticsNumFrames += 1;
-        
-        if (mStatisticsUpdateTime >= ONE_SECOND)
-        {
-            mStatisticsText.setString(
-                                      "Frames / Second = " + std::to_string(mStatisticsNumFrames) + "\n" +
-                                      "Time / Update = " + std::to_string((float)mStatisticsUpdateTime.count()/mStatisticsNumFrames/1000000) + "ms" + "\n"
-                                      + "V-Sync enabled: " + (mVSync ? "Yes" : "No") + "\n"
-                                      + "Number of objects: To be implemented"); // + toString(entitiesContainer.count()));
-            
-            mStatisticsUpdateTime -= ONE_SECOND;
-            mStatisticsNumFrames = 0;
-        }
-    }
-    
 } // namespace xgs

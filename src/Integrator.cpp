@@ -4,29 +4,30 @@
 namespace xgs {
     
     // Simple integrator. Accumulates error as time passes.
-    void Integrator::Euler(State &state,
-                           const HiResDuration &dt)
+    void Integrator::Euler(PhysicState& physics,
+						   sf::Transformable& transf,
+						   const HiResDuration& dt)
     {
         float dtValue = ((float)dt.count()/ONE_SECOND.count());
         
-        state.position = state.position + state.velocity * dtValue;
-        state.velocity = state.velocity + (state.force / state.mass) * dtValue;
+        transf.setPosition(transf.getPosition() + physics.getVelocity() * dtValue);
+        physics.setVelocity(physics.getVelocity() + (physics.getForce() / physics.getMass()) * dtValue);
     }
     
-    // More accurate than Euler.
-    // NOTE: It behaves differently (slowly?) than Euler regarding to forces/acceleration. I believe is a bug. I'll check it later.
-    void Integrator::RK4(State &state,
-                         const HiResDuration &dt)
+    // More accurate than Euler, but a bit more resource-consuming.
+    void Integrator::RK4(PhysicState& physics,
+						 sf::Transformable& transf,
+						 const HiResDuration& dt)
     {
         float dtValue = ((float)dt.count()/ONE_SECOND.count());
         
         Derivative a,b,c,d;
         Derivative initial;
         
-        a = evaluateRK4(state, HiResDuration::zero(), initial);
-        b = evaluateRK4(state, dt / 2, a);
-        c = evaluateRK4(state, dt / 2, b);
-        d = evaluateRK4(state, dt, c);
+        a = evaluateRK4(physics, transf, HiResDuration::zero(), initial);
+        b = evaluateRK4(physics, transf, dt / 2, a);
+        c = evaluateRK4(physics, transf, dt / 2, b);
+        d = evaluateRK4(physics, transf, dt, c);
         
         sf::Vector2f dpdt = 1.0f / 6.0f *
         ( a.dp + 2.0f * (b.dp + c.dp) + d.dp );
@@ -34,33 +35,35 @@ namespace xgs {
         sf::Vector2f dvdt = 1.0f / 6.0f *
         ( a.dv + 2.0f * (b.dv + c.dv) + d.dv );
         
-        state.position = state.position + dpdt * dtValue;
-        state.velocity = state.velocity + dvdt * dtValue;
+        transf.setPosition(transf.getPosition() + dpdt * dtValue);
+        physics.setVelocity(physics.getVelocity() + dvdt * dtValue);
     }
     
     // Auxiliar function for RK4 integrator
-    Derivative Integrator::evaluateRK4(const State &initial,
-                                       const HiResDuration &dt,
-                                       const Derivative &d)
+    Derivative Integrator::evaluateRK4(const PhysicState& initialPhysics,
+									   const sf::Transformable& initialTransf,
+									   const HiResDuration& dt,
+									   const Derivative& d)
     {
         float dtValue = ((float)dt.count()/ONE_SECOND.count());
         
-        State state;
-        state.position = initial.position + d.dp * dtValue; // Add the velocity to position
-        state.velocity = initial.velocity + d.dv * dtValue; // Add the acceleration to velocity
-        state.force = initial.force;
-        state.mass = initial.mass;
+        PhysicState physics;
+		sf::Transformable transf;
+        transf.setPosition(initialTransf.getPosition() + d.dp * dtValue); // Add the velocity to position
+        physics.setVelocity(initialPhysics.getVelocity() + d.dv * dtValue); // Add the acceleration to velocity
+        physics.setForce(initialPhysics.getForce());
+        physics.setMass(initialPhysics.getMass());
         
         Derivative output;
-        output.dp = state.velocity;
-        output.dv = accelerationRK4(state);
+        output.dp = physics.getVelocity();
+        output.dv = accelerationRK4(physics);
         return output;
     }
     
     // Auxiliar function for RK4 integrator
-    sf::Vector2f Integrator::accelerationRK4(const State &state)
+    sf::Vector2f Integrator::accelerationRK4(const PhysicState& physics)
     {
-        return state.force / state.mass;
+        return physics.getForce() / physics.getMass();
     }
     
 } // namespace xgs
