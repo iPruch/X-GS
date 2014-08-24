@@ -3,6 +3,7 @@
 
 #include <SFML/System/NonCopyable.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Window/Event.hpp>
 
 #include <X-GS/Time.hpp>
 #include <X-GS/Scene.hpp>
@@ -22,10 +23,11 @@ namespace xgs {
 		
 		template <typename T>
 		void					registerScene(Scenes::ID stateID);
-		
 		void					loadScene(Scenes::ID sceneID);
+		
 		void                    update(const HiResDuration& dt);
 		void                    render();
+		void					handleEvent(const sf::Event& event);
         
 	private:
 		Scene::ScenePtr			createScene(Scenes::ID sceneID);
@@ -39,9 +41,9 @@ namespace xgs {
 	
 	// Template implementation
 	template <typename T>
-	void SceneManager::registerScene(Scenes::ID stateID)
+	void SceneManager::registerScene(Scenes::ID sceneID)
 	{
-		mFactories[stateID] = [this] ()
+		mFactories[sceneID] = [this] ()
 		{
 			return Scene::ScenePtr(new T(mWindow, *this));
 		};

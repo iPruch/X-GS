@@ -6,6 +6,7 @@
 #include <SFML/System/NonCopyable.hpp>
 #include <SFML/Graphics/Transformable.hpp>
 #include <SFML/Graphics/Drawable.hpp>
+#include <SFML/Window/Event.hpp>
 
 #include <X-GS/Time.hpp>
 
@@ -27,9 +28,10 @@ namespace xgs {
 		void					attachChild(NodePtr child);
 		NodePtr					detachChild(const SceneGraphNode& node);
 		void					destroy();
-		
+				
 		void					update(const HiResDuration& dt);
-		virtual void			draw(sf::RenderTarget& target, sf::RenderStates states) const;
+		void					draw(sf::RenderTarget& target, sf::RenderStates states) const;
+		void					handleEvent(const sf::Event& event);
 
 		sf::Vector2f			getWorldPosition() const;
 		sf::Transform			getWorldTransform() const;
@@ -38,6 +40,9 @@ namespace xgs {
 		virtual void			updateThis(const HiResDuration& dt);
 		void					updateChildren(const HiResDuration& dt);
 
+		virtual void			handleEventThis(const sf::Event& event);
+		void					handleEventChildren(const sf::Event& event);
+		
 		virtual void			drawThis(sf::RenderTarget& target, sf::RenderStates states) const;
 		void					drawChildren(sf::RenderTarget& target, sf::RenderStates states) const;
 

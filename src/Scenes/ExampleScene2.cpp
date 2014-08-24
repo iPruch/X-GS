@@ -9,22 +9,24 @@ namespace xgs {
 	: Scene(window, sceneManager)
 	, mTransitionState(none)
 	, mTransitionTime(0)
-	, mTransitionDuration(ONE_SECOND*3)
+	, mTransitionDuration(ONE_SECOND*2)
 	, mFadingRectangle()
+	, mFontManager()
+	, mTextureManager()
 	{
-		// Load resources here (RAII)
 		std::cout << "ExampleScene2 constructor\n";
 
-		mFont.loadFromFile(resourcePath() + "Sansation.ttf"); // resourcePath() method needs an implementation per platform/OS
-        mText.setFont(mFont);
-        mText.setPosition(mWindow.getSize().x / 2, mWindow.getSize().y / 2);
-        mText.setCharacterSize(32);
+		// Load resources here (RAII)
+		loadResources();
+		
+		mText.setFont(mFontManager.get(Fonts::Sansation, FontManager::Global));
+        mText.setPosition(mWindow.getSize().x / 2, 5.f);
+        mText.setCharacterSize(20);
         mText.setColor(sf::Color::White);
-		mText.setString("Example Scene 2");
+		mText.setString("Example Scene 2 \n B - Back to previous scene \n Arrows/WASD - Move player");
 		
 		// Build the scene graph
 		buildScene();
-		
 		
 		// Begin in transition
 		mTransitionState = in;
@@ -33,10 +35,20 @@ namespace xgs {
 		mFadingRectangle.setSize(sf::Vector2f(mWindow.getView().getSize().x, mWindow.getView().getSize().y));
 		mFadingRectangle.setFillColor(sf::Color(0, 0, 0, 255));
 	}
-
+	
+	void ExampleScene2::loadResources()
+	{
+		// Load this scene specific resources
+		mTextureManager.load(Textures::ExamplePlayer, "playerShip.gif");
+	}
+	
 	void ExampleScene2::buildScene()
 	{
+		sf::FloatRect bounds(0, 0, mWindow.getView().getSize().x, mWindow.getView().getSize().y);
 
+		std::unique_ptr<ExamplePlayerEntity> player(new ExamplePlayerEntity(bounds, mTextureManager.get(Textures::ExamplePlayer)));
+				
+		mSceneGraph.attachChild(std::move(player));
 	}
 	
 	void ExampleScene2::update(const HiResDuration &dt)
@@ -63,12 +75,6 @@ namespace xgs {
 				break;
 				
 			case inFinished:
-				mTransitionTime += dt;
-				
-				if (mTransitionTime >= ONE_SECOND*3) {
-					mTransitionState = out;
-					mTransitionTime = HiResDuration(0);
-				}
 				break;
 				
 			case out:
@@ -118,6 +124,20 @@ namespace xgs {
 			case outFinished:
 				mWindow.draw(mFadingRectangle);
 				break;
+		}
+	}
+	
+	void ExampleScene2::handleEvent(const sf::Event& event)
+	{
+		// Perform appropiate actions (only if not in middle of a transition)
+		if (event.type == sf::Event::KeyPressed && mTransitionState != (in || out))
+		{
+			// B key - Back to ExampleScene
+			if (event.key.code == sf::Keyboard::B)
+				mTransitionState = out;
+			
+			// Propagate event handling to entities in the scene graph
+			mSceneGraph.handleEvent(event);
 		}
 	}
 	

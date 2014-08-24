@@ -4,6 +4,7 @@
 #include <SFML/System/NonCopyable.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/View.hpp>
+#include <SFML/Window/Event.hpp>
 
 #include <X-GS/SceneGraphNode.hpp>
 #include <X-GS/Scenes/ScenesIdentifiers.hpp>
@@ -48,6 +49,9 @@ namespace xgs {
 		
 		virtual void						update(const HiResDuration& dt) = 0;
 		virtual void						render() = 0;
+		virtual void						handleEvent(const sf::Event& event) = 0;
+		
+		virtual void						loadResources() = 0;
     
 	// Variables (member / properties)
 	protected:

@@ -34,6 +34,11 @@ namespace xgs {
 		currentScene->render();
 	}
 	
+	void SceneManager::handleEvent(const sf::Event &event)
+	{
+		currentScene->handleEvent(event);
+	}
+	
 	SceneManager::~SceneManager()
 	{
 		// Cleanup

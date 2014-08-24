@@ -12,7 +12,6 @@ namespace xgs {
 	, mTransformable()
 	{
 		// Load resources here (RAII)
-		//mTransformable.
 	}
 	
 	void SceneGraphNode::attachChild(NodePtr child)
@@ -46,7 +45,7 @@ namespace xgs {
 	
 	void SceneGraphNode::updateThis(const HiResDuration& dt)
 	{
-		// Do nothing by default
+		// Do nothing by default. Implement it on a custom Entity
 	}
 	
 	void SceneGraphNode::updateChildren(const HiResDuration& dt)
@@ -67,13 +66,30 @@ namespace xgs {
 	
 	void SceneGraphNode::drawThis(sf::RenderTarget& target, sf::RenderStates states) const
 	{
-		// Do nothing by default
+		// Do nothing by default. Implement it on a custom Entity
 	}
 	
 	void SceneGraphNode::drawChildren(sf::RenderTarget& target, sf::RenderStates states) const
 	{
 		for(const NodePtr& child : mChildren)
 			child->draw(target, states);
+	}
+	
+	void SceneGraphNode::handleEvent(const sf::Event &event)
+	{
+		handleEventThis(event);
+		handleEventChildren(event);
+	}
+	
+	void SceneGraphNode::handleEventThis(const sf::Event &event)
+	{
+		// Do nothing by default. Implement it on a custom Entity
+	}
+	
+	void SceneGraphNode::handleEventChildren(const sf::Event &event)
+	{
+		for(const NodePtr& child : mChildren)
+			child->handleEvent(event);
 	}
 	
 	sf::Vector2f SceneGraphNode::getWorldPosition() const

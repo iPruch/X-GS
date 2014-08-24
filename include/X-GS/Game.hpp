@@ -12,6 +12,10 @@
 #include <X-GS/Scenes/ExampleScene2.hpp>
 #include <X-GS/Scenes/ScenesIdentifiers.hpp>
 #include <X-GS/SceneManager.hpp>
+#include <X-GS/ResourceManager.hpp>
+#include <X-GS/ResourceIdentifiers.hpp>
+
+#include <iostream>
 
 namespace xgs {
     
@@ -28,17 +32,23 @@ namespace xgs {
 	private:
 		void									update(const HiResDuration& dt);
 		void									render();
+		void									handleEvents();
 		void									updateStatistics(const HiResDuration& elapsedTime);
+		
+		void									loadGeneralResources();
         
 	// Variables (member / properties)
 	private:
 		sf::RenderWindow						mWindow;
 		bool									mVSync;
 		SceneManager							mSceneManager;
-        
+		sf::Event								mEvent;
+		
+		// Resources managers
+		FontManager								mFontManager;
+		
 		// Statistics
 		HiResDuration							mTimeSinceStart; // Accumulator of all time
-		sf::Font								mFont;
 		sf::Text								mStatisticsText;
 		HiResDuration							mStatisticsUpdateTime;
 		std::size_t								mStatisticsNumFrames;

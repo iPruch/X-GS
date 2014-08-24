@@ -5,6 +5,8 @@
 
 #include <X-GS/SceneGraphNode.hpp>
 
+#include <SFML/Window/Event.hpp>
+
 namespace xgs {
 	
 	/*
@@ -17,8 +19,10 @@ namespace xgs {
 	public:
 								Entity() {}
 		virtual					~Entity() {}
+		
 		virtual void			updateThis(const HiResDuration& dt) = 0;
 		virtual void			drawThis(sf::RenderTarget& target, sf::RenderStates states) const = 0;
+		virtual void			handleEventThis(const sf::Event& event) = 0;
 		
 	// Variables (member / properties)
 	private:

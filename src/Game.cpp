@@ -1,19 +1,20 @@
 #include <X-GS/Game.hpp>
 
-#include "ResourcePath.hpp" // Not provided with X-GS. 
-
 namespace xgs {
     
 	// Constructor
     Game::Game()
-    : mWindow(sf::VideoMode(200, 200), "Window Title", sf::Style::Close)
+    : mWindow(sf::VideoMode(800, 600), "Window Title", sf::Style::Close)
 	, mTimeSinceStart(0)
 	, mStatisticsNumFrames(0)
 	, mStatisticsUpdateTime(0)
 	, mVSync(true)
 	, mSceneManager(mWindow)
+	, mFontManager()
+	, mEvent()
     {
         // Resource loading here if needed (RAII)
+		loadGeneralResources();
 		
 		// Set some mWindow's properties
         mWindow.setVerticalSyncEnabled(mVSync);
@@ -23,8 +24,7 @@ namespace xgs {
 		//mWindow.setView(view);
 		
         // Statistics
-        mFont.loadFromFile(resourcePath() + "Sansation.ttf"); // resourcePath() method needs an implementation per platform/OS
-        mStatisticsText.setFont(mFont);
+        mStatisticsText.setFont(mFontManager.get(Fonts::Sansation, FontManager::Global));
         mStatisticsText.setPosition(5.f, 5.f);
         mStatisticsText.setCharacterSize(14);
         mStatisticsText.setColor(sf::Color::Green);
@@ -37,7 +37,11 @@ namespace xgs {
 		mSceneManager.loadScene(Scenes::Example);
     }
     
-	
+	void Game::loadGeneralResources()
+	{
+		// Load here resources which will be shared among different objects (scenes, entities...) in your game
+		mFontManager.load(Fonts::Sansation, "Sansation.ttf", FontManager::Global);
+	}
 	
     void Game::update(const HiResDuration& dt)
     {
@@ -92,6 +96,33 @@ namespace xgs {
 		
         mWindow.display();
     }
+	
+	void Game::handleEvents()
+	{
+		// while there are pending events...
+		while (mWindow.pollEvent(mEvent))
+		{
+			// check the type of the event...
+			switch (mEvent.type)
+			{
+				// window closed
+				case sf::Event::Closed:
+					mWindow.close();
+					break;
+					
+				// key pressed
+				case sf::Event::KeyPressed:
+					//std::cout << "KeyPressed event" << std::endl;
+					mSceneManager.handleEvent(mEvent);
+					break;
+					
+				// Add more event types here if needed
+					
+				default:
+					break;
+			}
+		}
+	}
     
     void Game::updateStatistics(const HiResDuration& elapsedTime)
     {
@@ -147,7 +178,7 @@ namespace xgs {
             lastRenderDuration = newTimeMeasure - lastTimeMeasure;
             lastTimeMeasure = newTimeMeasure;
             
-            // Input handling call here
+			handleEvents();
             
             update(simulationFixedDuration);
             mTimeSinceStart += simulationFixedDuration;
@@ -185,7 +216,7 @@ namespace xgs {
             lastRenderDuration = newTimeMeasure - lastTimeMeasure;
             lastTimeMeasure = newTimeMeasure;
             
-            // Input handling call here
+			handleEvents();
             
             update(lastRenderDuration);
             mTimeSinceStart += lastRenderDuration;
@@ -239,7 +270,7 @@ namespace xgs {
             {
                 simulationDuration = std::min(lastRenderDuration, simulationFixedDuration);
                 
-                // Input handling call here
+				handleEvents();
                 
                 update(simulationDuration);
                 
@@ -292,7 +323,7 @@ namespace xgs {
             {
                 accumulatedRenderTime -= simulationFixedDuration;
                 
-                // Input handling call here
+				handleEvents();
                 
                 update(simulationFixedDuration);
                 
