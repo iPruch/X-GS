@@ -1,25 +1,24 @@
-#ifndef XGS_EXAMPLEBALLENTITY_HPP
-#define XGS_EXAMPLEBALLENTITY_HPP
+#ifndef YOURGAME_EXAMPLEBALLENTITY_HPP
+#define YOURGAME_EXAMPLEBALLENTITY_HPP
 
-#include <SFML/Graphics/RenderTarget.hpp> // Completes the RenderTarget forward declaration in Drawable, inherited from Entity <- SceneGrahpNode
 #include <SFML/Graphics/CircleShape.hpp>
 
 #include <X-GS/Entity.hpp>
 #include <X-GS/PhysicState.hpp>
 #include <X-GS/Integrator.hpp>
 
-using namespace xgs;
+//#include <iostream>
 
 /*
- Derived class
+ Derived class from xgs::Entity
  */
-class ExampleBallEntity : public Entity
+class ExampleBallEntity : public xgs::Entity
 {
 public:
 	ExampleBallEntity(sf::FloatRect bounds);
 	virtual					~ExampleBallEntity();
 	
-	virtual void			updateThis(const HiResDuration& dt);
+	virtual void			updateThis(const xgs::HiResDuration& dt);
 	virtual void			drawThis(sf::RenderTarget& target, sf::RenderStates states) const;
 	virtual void			handleEventThis(const sf::Event& event);
 	
@@ -28,9 +27,8 @@ public:
 private:
 	// Components
 	sf::CircleShape			mCircle;
-	PhysicState				mPhysics;
 	sf::FloatRect			mBounds;
-	
+	xgs::PhysicState		mPhysics;
 };
 
-#endif // XGS_EXAMPLEBALLENTITY_HPP
+#endif // YOURGAME_EXAMPLEBALLENTITY_HPP

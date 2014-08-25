@@ -1,8 +1,7 @@
-#include <X-GS/Entities/ExampleBallEntity.hpp>
-#include <random>
-#include <iostream>
+#include "ExampleBallEntity.hpp"
 
-using namespace xgs;
+#include <random>
+//#include <iostream>
 
 ExampleBallEntity::ExampleBallEntity(sf::FloatRect bounds)
 : mCircle()
@@ -26,10 +25,10 @@ ExampleBallEntity::ExampleBallEntity(sf::FloatRect bounds)
 	mPhysics.setForce(sf::Vector2f(0.f, 9.8f * 20 * mPhysics.getMass())); // Gravity
 }
 
-void ExampleBallEntity::updateThis(const HiResDuration &dt)
+void ExampleBallEntity::updateThis(const xgs::HiResDuration &dt)
 {
 	// Advance the physics with Euler integration
-	Integrator::Euler(mPhysics, mTransformable, dt);
+	xgs::Integrator::Euler(mPhysics, mTransformable, dt);
 	
 	// Keep the ball inside the bounds
 	// Right
@@ -54,7 +53,7 @@ void ExampleBallEntity::updateThis(const HiResDuration &dt)
 	}
 	// Bottom
 	if (mTransformable.getPosition().y > mBounds.top + mBounds.height - mCircle.getRadius()) {
-
+		
 		if (mPhysics.getVelocity().y < 30.f)
 			mPhysics.setVelocity(sf::Vector2f(mPhysics.getVelocity().x, 0.f));
 		
@@ -63,7 +62,7 @@ void ExampleBallEntity::updateThis(const HiResDuration &dt)
 	}
 	// Top
 	else if (mTransformable.getPosition().y < mBounds.top + mCircle.getRadius()) {
-
+		
 		if (mPhysics.getVelocity().y > -30.f)
 			mPhysics.setVelocity(sf::Vector2f(mPhysics.getVelocity().x, 0.f));
 		
@@ -80,7 +79,7 @@ void ExampleBallEntity::drawThis(sf::RenderTarget &target, sf::RenderStates stat
 void ExampleBallEntity::handleEventThis(const sf::Event& event)
 {
 	//std::cout << "Event reaches ExampleBallEntity" << std::endl;
-
+	
 	if (event.type == sf::Event::KeyPressed)
 	{
 		// G key - Toggle gravity
@@ -96,7 +95,7 @@ void ExampleBallEntity::handleEventThis(const sf::Event& event)
 			mPhysics.setForce(sf::Vector2f(-9.8f * 20 * mPhysics.getMass(), 0.f));
 		if (event.key.code == sf::Keyboard::Right)
 			mPhysics.setForce(sf::Vector2f(9.8f * 20 * mPhysics.getMass(), 0.f));
-
+		
 	}
 }
 

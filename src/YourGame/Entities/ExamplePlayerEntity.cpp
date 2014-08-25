@@ -1,6 +1,4 @@
-#include <X-GS/Entities/ExamplePlayerEntity.hpp>
-
-using namespace xgs;
+#include "ExamplePlayerEntity.hpp"
 
 ExamplePlayerEntity::ExamplePlayerEntity(sf::FloatRect bounds, sf::Texture& texture)
 : mPhysics()
@@ -17,13 +15,13 @@ ExamplePlayerEntity::ExamplePlayerEntity(sf::FloatRect bounds, sf::Texture& text
 	mTransformable.setPosition(mBounds.width / 2, mBounds.height / 2);
 }
 
-void ExamplePlayerEntity::updateThis(const HiResDuration &dt)
+void ExamplePlayerEntity::updateThis(const xgs::HiResDuration &dt)
 {
 	// Handle real-time input
 	handleRealTimeInput();
 	
 	// Advance the physics with Euler integration
-	Integrator::Euler(mPhysics, mTransformable, dt);
+	xgs::Integrator::Euler(mPhysics, mTransformable, dt);
 	
 	// Keep the player inside the specified bounds
 	// Right
@@ -39,13 +37,13 @@ void ExamplePlayerEntity::updateThis(const HiResDuration &dt)
 	}
 	// Bottom
 	if (mTransformable.getPosition().y > mBounds.top + mBounds.height - getLocalBounds().height) {
-
+		
 		mTransformable.setPosition(sf::Vector2f(mTransformable.getPosition().x, mBounds.top + mBounds.height - getLocalBounds().height));
 		mPhysics.setVelocity(sf::Vector2f(mPhysics.getVelocity().x, 0.f));
 	}
 	// Top
 	else if (mTransformable.getPosition().y < mBounds.top) {
-
+		
 		mTransformable.setPosition(sf::Vector2f(mTransformable.getPosition().x, mBounds.top));
 		mPhysics.setVelocity(sf::Vector2f(mPhysics.getVelocity().x, 0.f));
 	}
@@ -68,7 +66,7 @@ void ExamplePlayerEntity::drawThis(sf::RenderTarget &target, sf::RenderStates st
 void ExamplePlayerEntity::handleEventThis(const sf::Event& event)
 {
 	//std::cout << "Event reaches ExampleBallEntity" << std::endl;
-
+	
 	if (event.type == sf::Event::KeyPressed)
 	{
 		// G key - Switch gravity (up/down)

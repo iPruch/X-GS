@@ -58,7 +58,7 @@ namespace xgs {
 		
 		Resource&					get(Identifier id, enum Scope = Local);
 		const Resource&				get(Identifier id, enum Scope = Local) const;
-				
+		
 	private:
 		void						insertResource(Identifier id, std::unique_ptr<Resource> resource, enum Scope = Local);
 		
@@ -73,10 +73,11 @@ namespace xgs {
 	std::map<Identifier, std::unique_ptr<Resource>> ResourceManager<Resource, Identifier>::GeneralResourceMap;
 	
 	
+	
 	/////////////////////////////
 	// Template implementation //
 	/////////////////////////////
-
+	
 	template <typename Resource, typename Identifier>
 	void ResourceManager<Resource, Identifier>::load(Identifier id, const std::string& filename, enum Scope scope)
 	{

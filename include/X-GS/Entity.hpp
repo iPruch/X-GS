@@ -6,6 +6,7 @@
 #include <X-GS/SceneGraphNode.hpp>
 
 #include <SFML/Window/Event.hpp>
+#include <SFML/Graphics/RenderTarget.hpp> // Completes the RenderTarget forward declaration in Drawable, inherited from Entity <- SceneGrahpNode
 
 namespace xgs {
 	
@@ -15,16 +16,16 @@ namespace xgs {
 	 */
 	class Entity : public SceneGraphNode
 	{
-	// Methods
+		// Methods
 	public:
-								Entity() {}
+		Entity() {}
 		virtual					~Entity() {}
 		
 		virtual void			updateThis(const HiResDuration& dt) = 0;
 		virtual void			drawThis(sf::RenderTarget& target, sf::RenderStates states) const = 0;
 		virtual void			handleEventThis(const sf::Event& event) = 0;
 		
-	// Variables (member / properties)
+		// Variables (member / properties)
 	private:
 		// TODO: Identification / messaging
 	};

@@ -1,5 +1,4 @@
 #include <X-GS/Integrator.hpp>
-#include <iostream>
 
 namespace xgs {
     
@@ -11,7 +10,7 @@ namespace xgs {
         float dtValue = ((float)dt.count()/ONE_SECOND.count());
         
         transf.setPosition(transf.getPosition() + physics.getVelocity() * dtValue);
-        physics.setVelocity(physics.getVelocity() + (physics.getForce() / physics.getMass()) * dtValue);		
+        physics.setVelocity(physics.getVelocity() + (physics.getForce() / physics.getMass()) * dtValue);
     }
     
     // More accurate than Euler, but a bit more resource-consuming.

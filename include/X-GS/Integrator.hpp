@@ -19,7 +19,7 @@ namespace xgs {
 	// Integrator class. Implements Euler and RK4 integration methods.
     class Integrator
     {
-	// Class methods
+		// Class methods
     public:
         void static                     Euler(PhysicState& physics,
 											  sf::Transformable& transf,
@@ -35,7 +35,7 @@ namespace xgs {
                                                     const HiResDuration& dt,
                                                     const Derivative& d);
         sf::Vector2f static             accelerationRK4(const PhysicState&
-													physics);
+														physics);
     };
     
 } // namespace xgs

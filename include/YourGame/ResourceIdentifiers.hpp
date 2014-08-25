@@ -1,6 +1,8 @@
 #ifndef XGS_RESOURCEIDENTIFIERS_HPP
 #define XGS_RESOURCEIDENTIFIERS_HPP
 
+#include <X-GS/ResourceManager.hpp>
+
 // Forward declaration of SFML classes
 namespace sf
 {
@@ -28,12 +30,8 @@ namespace Fonts
 
 // Create new enumerations for new resource types
 
-// Forward declaration and a few type definitions
-//template <typename Resource, typename Identifier>
-//class ResourceManager; Not included and doesn't need forward declaration??
-
-typedef ResourceManager<sf::Texture, Textures::ID>	TextureManager;
-typedef ResourceManager<sf::Font, Fonts::ID>		FontManager;
+typedef xgs::ResourceManager<sf::Texture, Textures::ID>	TextureManager;
+typedef xgs::ResourceManager<sf::Font, Fonts::ID>		FontManager;
 // Create new typedefs for new resource types
 
 #endif // XGS_RESOURCEIDENTIFIERS_HPP

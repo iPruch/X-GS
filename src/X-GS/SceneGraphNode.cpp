@@ -5,7 +5,7 @@
 #include <cassert>
 
 namespace xgs {
-
+	
 	SceneGraphNode::SceneGraphNode()
 	: mChildren()
 	, mParent(nullptr)

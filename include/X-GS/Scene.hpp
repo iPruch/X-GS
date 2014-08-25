@@ -7,7 +7,9 @@
 #include <SFML/Window/Event.hpp>
 
 #include <X-GS/SceneGraphNode.hpp>
-#include <X-GS/Scenes/ScenesIdentifiers.hpp>
+//#include <X-GS/Scenes/ScenesIdentifiers.hpp>
+
+#include "ScenesIdentifiers.hpp"
 
 namespace xgs {
     
@@ -36,11 +38,11 @@ namespace xgs {
 	
     class Scene : private sf::NonCopyable
     {
-	// Typedefs and enumerations
+		// Typedefs and enumerations
 	public:
 		typedef std::unique_ptr<Scene>		ScenePtr;
 		
-	// Methods
+		// Methods
 	public:
 		explicit							Scene(sf::RenderWindow& window, SceneManager& sceneManager) : mWindow(window), mSceneView(mWindow.getView()), mSceneGraph(), mSceneManager(sceneManager){}
 		virtual								~Scene(){}
@@ -52,8 +54,8 @@ namespace xgs {
 		virtual void						handleEvent(const sf::Event& event) = 0;
 		
 		virtual void						loadResources() = 0;
-    
-	// Variables (member / properties)
+		
+		// Variables (member / properties)
 	protected:
 		sf::RenderWindow&					mWindow;
 		sf::View							mSceneView; // Camera

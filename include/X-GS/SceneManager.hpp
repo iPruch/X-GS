@@ -7,19 +7,21 @@
 
 #include <X-GS/Time.hpp>
 #include <X-GS/Scene.hpp>
-#include <X-GS/Scenes/ScenesIdentifiers.hpp>
 #include <X-GS/Entity.hpp>
+//#include <X-GS/Scenes/ScenesIdentifiers.hpp>
 
 #include <map>
+
+#include "ScenesIdentifiers.hpp"
 
 namespace xgs {
     
     class SceneManager : private sf::NonCopyable
     {
-	// Methods
+		// Methods
 	public:
 		explicit				SceneManager(sf::RenderWindow& window);
-								~SceneManager();
+		~SceneManager();
 		
 		template <typename T>
 		void					registerScene(Scenes::ID stateID);
@@ -32,7 +34,7 @@ namespace xgs {
 	private:
 		Scene::ScenePtr			createScene(Scenes::ID sceneID);
 		
-	// Variables (member / properties)
+		// Variables (member / properties)
 	private:
 		sf::RenderWindow&		mWindow;
 		Scene::ScenePtr			currentScene;
