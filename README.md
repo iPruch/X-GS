@@ -10,7 +10,7 @@ X-GS stands for Cross-platform Game Skeleton, which I expect to sound like "**th
 
 It is written in C++ with one idea in mind: Efficiency. C++ is known for being very efficient and for having a very robust standard library. It appeared in 1983, but it still used on a wide range of fields, specially those where every bit of performance matters (as you can guess, video games is one of these fields). I'm about to get my degree at IT, so I'm kind of newbie. I haven't learnt C++ at the University and it looks pretty difficult at first. Some C++ books after, my opinion hasn't changed. I have to practise, make mistakes and learn from them. Maybe it's hasty to get that practise doing my end-of-degree project, but I'll try. Oh, well, probably I should have started from there: Yes, **X-GS is my end-of-degree project**.
 
-The other important pilar of X-GS is **SFML (Simple and Fast Multimedia Library)**. Think of it as a collection of primitives to work with graphics, audio, network, input, etc. For those who know SDL, SFML is some sort of new and object-oriented SDL with a lot of improvements (I'll look for some benchmakrs and post them here) and great modularity, structure and organization. Also, it provides the 'X' of the title: Code is cross-platform as SFML gives an API which abstracts the SO-specific details. Linux, Mac OS X and Windows are the current supported platforms by SFML. They are a great team with an active community, and they are working hard to make SFML compatible with iOS and Android.
+The other important pilar of X-GS is [**SFML (Simple and Fast Multimedia Library)**](http://www.sfml-dev.org/). Think of it as a collection of primitives to work with graphics, audio, network, input, etc. For those who know SDL, SFML is some sort of new and object-oriented SDL with a lot of improvements (I'll look for some benchmakrs and post them here) and great modularity, structure and organization. Also, it provides the 'X' of the title: Code is cross-platform as SFML gives an API which abstracts the SO-specific details. Linux, Mac OS X and Windows are the current supported platforms by SFML. They are a great team with an active community, and they are working hard to make SFML compatible with iOS and Android.
 
 But C++ and SFML by themselves doesn't give you a game loop, an Entity (or GameObject for Unity fans), nor a scene graph, physics, etc. Providing some of those basic features is the main goal of X-GS.
 
@@ -36,8 +36,60 @@ Of course, X-GS isn't the panacea. But it can be the starting point of your own 
 
 The deadline of my end-of-degree project is due for September, so I need to finish this project asap. That said, my objective is to get the fundamental part of X-GS working before that date. After that I'd probably extend it with some functionalities, but again: please, don't expect a full-of-nice-features engine as it is not the purpose. Think YAGNI!
 
+**Edit**: I think it is ready. The last commit changed the file and directory structure. See the tutorial below to start making your game with X-GS!
+
 
 ### Milestones
 
 If you want to see the milestones and what I'm working on, [here] (https://trello.com/b/JPZUbDz7/x-gs) is my Trello public board for this project.
 
+Setup tutorial
+--------------
+
+First of all, follow [this tutorial](http://sfml-dev.org/tutorials/2.1/) to install SFML in your system (I have been using SFML 2.1. If a new version is avalible at the time of your reading and it does not work with X-GS, download version 2.1 and try again). If you need more information about SFML, you can visit the [official webpage](http://www.sfml-dev.org/) or the [github repository](https://github.com/LaurentGomila/SFML).
+
+Now, just download or clone X-GS from this repository and start editing the project according to your needs!
+As you can see, the directory structure is the following:
+
+GameProject
+├── include/
+│   ├── X-GS/
+│   │    └── X-GS headers
+│   ├── YourGame/
+│   │    ├── Entities/
+│   │    │    └── Entities' headers
+│   │    ├── Scenes/
+│   │    │    ├── Scenes' headers
+│   │    │    └── SceneIdentifiers.hpp
+│   │    ├── Game.hpp
+│   │    ├── ResourceIdentifiers.hpp
+│   │    └── Your game's headers
+│   └── Add more libraries here if you need
+│
+└── src/
+    ├── X-GS/
+    │    └── X-GS sources
+    └── YourGame/
+         ├── Entities/
+         │    └── Entities' sources
+         ├── Scenes/
+         │    └── Scenes' sources
+         ├── Game.cpp
+         ├── Main.cpp
+         └── Other sources of your game
+         
+If you want to keep things simple, you'll want to stay away from X-GS classes and write your code at your own entities/scenes and some configurations at **Game.hpp/cpp** and **SceneIdentifiers.hpp/ResourceIdentifiers.hpp**. But, of course, you can edit/add/delete any class you want from/to X-GS.
+
+The best way to learn how to use X-GS is to look into its files. They have comments in the appropiate places for you to add your code or modify settings. As I said before, if you want to keep things simple just look at "YourGame" files and forget about the X-GS directory. Here is a simple explanation:
+
+Main.cpp is the starting point of the game. It simply instantiates the Game class and runs it. There are 4 different run methods, which are explained at almost the ending of Game.cpp in form of comment blocks. Decide which of them your game needs and use it at Main.cpp.
+
+Game.cpp is where almost all configuration is done: screen size, v-sync, scenes registering (and which one will be the first to show up when the game starts), etc. Set your configurations at Game's constructor (at almost the beginning of the cpp file). Remember to register any scene you create at Game::registerScenes() method. Also, remember to include your scenes' headers first at Game.hpp.
+
+SceneIdentifiers.hpp is just an enumeration with IDs for the scenes. Make sure you give a different ID to each scene in your game.
+
+ResourceIdentifiers.hpp is very similar to SceneIdentifiers.hpp, but it has some more configurations. Check its contents and you'll know how to fill it.
+
+The project comes with some example scenes and entities so that you can see a working project in action. You may want to look at them when creating your own entities or scenes. You can also delete them if you wish (remember deleting also any related ID from the previous Identifiers headers).
+
+I will give a more detailed tutorial in the future. Now I'm a little bussy doing a game example and the report document of my end-of-degree project. Please, wish me luck! :3
