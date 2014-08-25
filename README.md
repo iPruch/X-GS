@@ -51,6 +51,7 @@ First of all, follow [this tutorial](http://sfml-dev.org/tutorials/2.1/) to inst
 Now, just download or clone X-GS from this repository and start editing the project according to your needs!
 As you can see, the directory structure is the following:
 
+```
 GameProject
 ├── include/
 │   ├── X-GS/
@@ -77,7 +78,8 @@ GameProject
          ├── Game.cpp
          ├── Main.cpp
          └── Other sources of your game
-         
+```
+
 If you want to keep things simple, you'll want to stay away from X-GS classes and write your code at your own entities/scenes and some configurations at **Game.hpp/cpp** and **SceneIdentifiers.hpp/ResourceIdentifiers.hpp**. But, of course, you can edit/add/delete any class you want from/to X-GS.
 
 The best way to learn how to use X-GS is to look into its files. They have comments in the appropiate places for you to add your code or modify settings. As I said before, if you want to keep things simple just look at "YourGame" files and forget about the X-GS directory. Here is a simple explanation:
