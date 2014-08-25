@@ -3,6 +3,7 @@
 
 namespace Scenes {
 	
+	// Fill this enumeration with IDs for your scenes
 	enum ID {
 		Example,
 		Example2

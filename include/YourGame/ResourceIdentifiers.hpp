@@ -1,5 +1,5 @@
-#ifndef XGS_RESOURCEIDENTIFIERS_HPP
-#define XGS_RESOURCEIDENTIFIERS_HPP
+#ifndef YOURGAME_RESOURCEIDENTIFIERS_HPP
+#define YOURGAME_RESOURCEIDENTIFIERS_HPP
 
 #include <X-GS/ResourceManager.hpp>
 
@@ -8,9 +8,10 @@ namespace sf
 {
 	class Texture;
 	class Font;
+	// Add needed forward declarations here
 }
 
-// Fill this enumeration with your textures IDs
+// Fill this enumeration with IDs for your textures
 namespace Textures
 {
 	enum ID
@@ -19,7 +20,7 @@ namespace Textures
 	};
 }
 
-// Fill this enumeration with your fonts IDs
+// Fill this enumeration with IDs for your fonts
 namespace Fonts
 {
 	enum ID
@@ -28,10 +29,10 @@ namespace Fonts
 	};
 }
 
-// Create new enumerations for new resource types
+// Create new enumerations for new resource types here
 
 typedef xgs::ResourceManager<sf::Texture, Textures::ID>	TextureManager;
 typedef xgs::ResourceManager<sf::Font, Fonts::ID>		FontManager;
-// Create new typedefs for new resource types
+// Create new typedefs for new resource types here
 
-#endif // XGS_RESOURCEIDENTIFIERS_HPP
+#endif // YOURGAME_RESOURCEIDENTIFIERS_HPP

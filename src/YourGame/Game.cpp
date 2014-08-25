@@ -4,6 +4,7 @@
 Game::Game()
 : mWindow(sf::VideoMode(800, 600), "Window Title", sf::Style::Close)
 , mTimeSinceStart(0)
+, mEnableStatistics(false)
 , mStatisticsNumFrames(0)
 , mStatisticsUpdateTime(0)
 , mVSync(false)
@@ -90,7 +91,9 @@ void Game::render()
 	
 	mSceneManager.render();
 	
-	mWindow.draw(mStatisticsText); // Comment this line to hide statistics
+	// Statistics will only be rendered if the flag is true
+	if(mEnableStatistics)
+		mWindow.draw(mStatisticsText);
 	
 	mWindow.display();
 }
@@ -124,6 +127,10 @@ void Game::handleEvents()
 
 void Game::updateStatistics(const xgs::HiResDuration& elapsedTime)
 {
+	// Statistics will only be updated if the flag is true
+	if (!mEnableStatistics)
+		return;
+	
 	mStatisticsUpdateTime += elapsedTime;
 	mStatisticsNumFrames += 1;
 	

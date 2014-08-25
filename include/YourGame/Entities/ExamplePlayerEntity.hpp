@@ -9,7 +9,14 @@
 #include <X-GS/Integrator.hpp>
 
 /*
- Derived class
+ Derived class from xgs::Entity and sf::Sprite
+ 
+ You can also have sf::Sprite as a member variable. In fact, with
+ that approach you could have multiple sprites per entity. This
+ can come in handy if your entity has different graphical parts
+ (i.e, clothes, helmet, weapon...). In that case you should change
+ ExamplePlayerEntity::drawThis implementation to draw all your
+ sprites instead of (*this) and stop inheriting from sf::Sprite
  */
 class ExamplePlayerEntity : public xgs::Entity, public sf::Sprite
 {

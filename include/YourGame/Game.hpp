@@ -1,5 +1,5 @@
-#ifndef XGS_GAME_HPP
-#define XGS_GAME_HPP
+#ifndef YOURGAME_GAME_HPP
+#define YOURGAME_GAME_HPP
 
 #include <SFML/System/Time.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -47,10 +47,11 @@ private:
 	FontManager								mFontManager;
 	
 	// Statistics
+	bool									mEnableStatistics;
 	xgs::HiResDuration						mTimeSinceStart; // Accumulator of all time
 	sf::Text								mStatisticsText;
 	xgs::HiResDuration						mStatisticsUpdateTime;
 	std::size_t								mStatisticsNumFrames;
 };
 
-#endif // XGS_GAME_HPP
+#endif // YOURGAME_GAME_HPP
