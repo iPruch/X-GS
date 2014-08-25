@@ -15,6 +15,8 @@
 
 #include "ScenesIdentifiers.hpp"
 #include "ResourceIdentifiers.hpp"
+
+// Include here all your scenes
 #include "ExampleScene.hpp"
 #include "ExampleScene2.hpp"
 
@@ -35,6 +37,7 @@ private:
 	void									updateStatistics(const xgs::HiResDuration& elapsedTime);
 	
 	void									loadGeneralResources();
+	void									registerScenes();
 	
 	// Variables (member / properties)
 private:

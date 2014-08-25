@@ -20,7 +20,7 @@ Game::Game()
 	mWindow.setKeyRepeatEnabled(false); // Disable key repeat when holding a key as this behavior is unwanted for games
 	sf::View view = mWindow.getView();
 	view.setViewport(sf::FloatRect(0.f, 0.f, 1.f, 1.f));
-	//mWindow.setView(view);
+	mWindow.setView(view);
 	
 	// Statistics
 	mStatisticsText.setFont(mFontManager.get(Fonts::Sansation, FontManager::Global));
@@ -28,9 +28,8 @@ Game::Game()
 	mStatisticsText.setCharacterSize(14);
 	mStatisticsText.setColor(sf::Color::Green);
 	
-	// Register the example scenes in the Scene Manager
-	mSceneManager.registerScene<ExampleScene>(Scenes::Example);
-	mSceneManager.registerScene<ExampleScene2>(Scenes::Example2);
+	// Register the game's scenes
+	registerScenes();
 	
 	// And load the first one
 	mSceneManager.loadScene(Scenes::Example);
@@ -40,6 +39,13 @@ void Game::loadGeneralResources()
 {
 	// Load here resources which will be shared among different objects (scenes, entities...) in your game
 	mFontManager.load(Fonts::Sansation, "Sansation.ttf", FontManager::Global);
+}
+
+void Game::registerScenes()
+{
+	// Register each of your scenes on the Scene Manager like this:
+	mSceneManager.registerScene<ExampleScene>(Scenes::Example);
+	mSceneManager.registerScene<ExampleScene2>(Scenes::Example2);
 }
 
 void Game::update(const xgs::HiResDuration& dt)
@@ -53,8 +59,8 @@ void Game::update(const xgs::HiResDuration& dt)
 	 
 	 // Advance the simulation/physics integrating
 	 // Choose Euler, RK4 or implement your own
-	 Integrator::Euler(entity.state, dt);
-	 //Integrator::RK4(entity.state, dt);
+	 xgs::Integrator::Euler(entity.state, dt);
+	 //xgs::Integrator::RK4(entity.state, dt);
 	 
 	 // Call each entity's own update method
 	 entity.update(dt);
