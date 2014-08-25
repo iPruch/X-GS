@@ -80,17 +80,17 @@ GameProject
          └── Other sources of your game
 ```
 
-If you want to keep things simple, you'll want to stay away from X-GS classes and write your code at your own entities/scenes and some configurations at **Game.hpp/cpp** and **SceneIdentifiers.hpp/ResourceIdentifiers.hpp**. But, of course, you can edit/add/delete any class you want from/to X-GS.
+If you want to keep things simple, you'll want to stay away from X-GS classes and write your code at your own entities/scenes and some configurations at Game.hpp/cpp and SceneIdentifiers.hpp/ResourceIdentifiers.hpp. But, of course, you can edit/add/delete any class you want from/to X-GS.
 
-The best way to learn how to use X-GS is to look into its files. They have comments in the appropiate places for you to add your code or modify settings. As I said before, if you want to keep things simple just look at "YourGame" files and forget about the X-GS directory. Here is a simple explanation:
+The best way to learn how to use X-GS is to look into its files. They have comments in the appropiate places for you to add your code or modify settings. As I said before, **if you want to keep things simple just look at "YourGame" files** and forget about the X-GS directory. Here is a simple explanation:
 
-Main.cpp is the starting point of the game. It simply instantiates the Game class and runs it. There are 4 different run methods, which are explained at almost the ending of Game.cpp in form of comment blocks. Decide which of them your game needs and use it at Main.cpp.
+- **Main.cpp** is the starting point of the game. It simply instantiates the Game class and runs it. There are 4 different run methods, which are explained at almost the ending of Game.cpp in form of comment blocks. Decide which of them your game needs and use it at Main.cpp.
 
-Game.cpp is where almost all configuration is done: screen size, v-sync, scenes registering (and which one will be the first to show up when the game starts), etc. Set your configurations at Game's constructor (at almost the beginning of the cpp file). Remember to register any scene you create at Game::registerScenes() method. Also, remember to include your scenes' headers first at Game.hpp.
+- **Game.cpp** is where almost all configuration is done: screen size, v-sync, scenes registering (and which one will be the first to show up when the game starts), etc. Set your configurations at Game's constructor (at almost the beginning of the cpp file). Remember to register any scene you create at Game::registerScenes() method. Also, remember to include your scenes' headers first at Game.hpp.
 
-SceneIdentifiers.hpp is just an enumeration with IDs for the scenes. Make sure you give a different ID to each scene in your game.
+- **SceneIdentifiers.hpp** is just an enumeration with IDs for the scenes. Make sure you give a different ID to each scene in your game.
 
-ResourceIdentifiers.hpp is very similar to SceneIdentifiers.hpp, but it has some more configurations. Check its contents and you'll know how to fill it.
+- **ResourceIdentifiers.hpp** is very similar to SceneIdentifiers.hpp, but it has some more configurations. Check its contents and you'll know how to fill it.
 
 The project comes with some example scenes and entities so that you can see a working project in action. You may want to look at them when creating your own entities or scenes. You can also delete them if you wish (remember deleting also any related ID from the previous Identifiers headers).
 
