@@ -22,7 +22,7 @@ namespace xgs {
         mText.setPosition(mWindow.getSize().x / 2, 5.f);
         mText.setCharacterSize(20);
         mText.setColor(sf::Color::Black);
-		mText.setString("Example Scene 1\n N - Next scene\n G - Toggle gravity\n Arrows - Change gravity direction");
+		mText.setString("Example Scene 1\n N - Next scene\n G - No gravity\n Arrows -  gravity direction");
 		
 		
 		// Build the scene graph
@@ -46,9 +46,11 @@ namespace xgs {
 	{
 		sf::FloatRect bounds(0, 0, mWindow.getView().getSize().x, mWindow.getView().getSize().y);
 		
-		for (int i = 0; i < 250; i++) {
+		// Instantiate 200 balls
+		for (int i = 0; i < 200; i++) {
 			std::unique_ptr<ExampleBallEntity> ball(new ExampleBallEntity(bounds));
 			
+			// Add each ball to the scene graph (as children of the root node)
 			mSceneGraph.attachChild(std::move(ball));
 		}
 

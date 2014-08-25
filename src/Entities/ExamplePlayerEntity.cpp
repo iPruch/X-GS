@@ -50,12 +50,18 @@ void ExamplePlayerEntity::updateThis(const HiResDuration &dt)
 		mPhysics.setVelocity(sf::Vector2f(mPhysics.getVelocity().x, 0.f));
 	}
 	
-	// Reduce previous velocity (until the player stops moving). This won't affect in a direction if a that direction key is pressed
+	/* Reduce previous velocity (until the player stops moving).
+	 This won't affect in a direction if a that direction key is
+	 pressed.
+	 This need vSync enabled. Using dt here is difficult because
+	 PhysicState lacks some features. If it had some kind of
+	 airFriction, this wouldn't be needed. */
 	mPhysics.setVelocity(mPhysics.getVelocity() * 0.9f);
 }
 
 void ExamplePlayerEntity::drawThis(sf::RenderTarget &target, sf::RenderStates states) const
 {
+	// static_cast as sf::Sprite this Entity to draw it
 	target.draw(static_cast<sf::Sprite>(*this), states);
 }
 

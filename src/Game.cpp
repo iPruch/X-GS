@@ -8,7 +8,7 @@ namespace xgs {
 	, mTimeSinceStart(0)
 	, mStatisticsNumFrames(0)
 	, mStatisticsUpdateTime(0)
-	, mVSync(true)
+	, mVSync(false)
 	, mSceneManager(mWindow)
 	, mFontManager()
 	, mEvent()
