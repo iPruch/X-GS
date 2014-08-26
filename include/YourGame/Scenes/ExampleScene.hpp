@@ -30,7 +30,7 @@ private:
 	// Methods
 public:
 	explicit			ExampleScene(sf::RenderWindow& window, xgs::SceneManager& sceneManager);
-	~ExampleScene();
+					~ExampleScene();
 	
 	virtual void			update(const xgs::HiResDuration& dt);
 	virtual void			render();
