@@ -29,8 +29,8 @@ private:
 	
 	// Methods
 public:
-	explicit				ExampleScene2(sf::RenderWindow& window, xgs::SceneManager& sceneManager);
-	~ExampleScene2();
+	explicit			ExampleScene2(sf::RenderWindow& window, xgs::SceneManager& sceneManager);
+					~ExampleScene2();
 	
 public:
 	virtual void			update(const xgs::HiResDuration& dt);
@@ -49,9 +49,9 @@ private:
 	
 	sf::RectangleShape		mBackground;
 	sf::RectangleShape		mFadingRectangle;
-	sf::Text				mText;
+	sf::Text			mText;
 	
-	FontManager				mFontManager;
+	FontManager			mFontManager;
 	TextureManager			mTextureManager;
 };
 
