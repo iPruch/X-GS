@@ -8,7 +8,6 @@
 #include <X-GS/Time.hpp>
 #include <X-GS/Scene.hpp>
 #include <X-GS/Entity.hpp>
-//#include <X-GS/Scenes/ScenesIdentifiers.hpp>
 
 #include <map>
 
