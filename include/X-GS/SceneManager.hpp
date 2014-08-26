@@ -20,24 +20,24 @@ namespace xgs {
     {
 		// Methods
 	public:
-		explicit				SceneManager(sf::RenderWindow& window);
-		~SceneManager();
+		explicit						SceneManager(sf::RenderWindow& window);
+									~SceneManager();
 		
 		template <typename T>
-		void					registerScene(Scenes::ID stateID);
-		void					loadScene(Scenes::ID sceneID);
+		void							registerScene(Scenes::ID stateID);
+		void							loadScene(Scenes::ID sceneID);
 		
-		void                    update(const HiResDuration& dt);
-		void                    render();
-		void					handleEvent(const sf::Event& event);
+		void                    				update(const HiResDuration& dt);
+		void                    				render();
+		void							handleEvent(const sf::Event& event);
         
 	private:
-		Scene::ScenePtr			createScene(Scenes::ID sceneID);
+		Scene::ScenePtr						createScene(Scenes::ID sceneID);
 		
 		// Variables (member / properties)
 	private:
-		sf::RenderWindow&		mWindow;
-		Scene::ScenePtr			currentScene;
+		sf::RenderWindow&					mWindow;
+		Scene::ScenePtr						currentScene;
 		std::map<Scenes::ID, std::function<Scene::ScenePtr()>>	mFactories;
     };
 	
