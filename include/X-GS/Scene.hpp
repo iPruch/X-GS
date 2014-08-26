@@ -34,6 +34,9 @@ namespace xgs {
 	 render() method will be called for rendering. Inside of it you can
 	 perform specific drawing for this scene (pause menu, GUI, etc.) and
 	 invoke the draw method of all scene graph nodes.
+	 
+	 handleEvents() method might be called if event propagation to the
+	 SceneManger has been done at Game class.
 	 */
 	
     class Scene : private sf::NonCopyable
@@ -44,8 +47,8 @@ namespace xgs {
 		
 		// Methods
 	public:
-		explicit							Scene(sf::RenderWindow& window, SceneManager& sceneManager) : mWindow(window), mSceneView(mWindow.getView()), mSceneGraph(), mSceneManager(sceneManager){}
-		virtual								~Scene(){}
+		explicit						Scene(sf::RenderWindow& window, SceneManager& sceneManager) : mWindow(window), mSceneView(mWindow.getView()), mSceneGraph(), mSceneManager(sceneManager){}
+		virtual							~Scene(){}
 		
 		virtual void						buildScene() = 0;
 		
@@ -58,7 +61,7 @@ namespace xgs {
 		// Variables (member / properties)
 	protected:
 		sf::RenderWindow&					mWindow;
-		sf::View							mSceneView; // Camera
+		sf::View						mSceneView; // Camera
 		SceneGraphNode						mSceneGraph;
 		SceneManager&						mSceneManager;
 	};
