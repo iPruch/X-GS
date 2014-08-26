@@ -57,7 +57,7 @@ namespace xgs {
 		void						unload(Identifier id, enum Scope = Local);
 		
 		Resource&					get(Identifier id, enum Scope = Local);
-		const Resource&				get(Identifier id, enum Scope = Local) const;
+		const Resource&					get(Identifier id, enum Scope = Local) const;
 		
 	private:
 		void						insertResource(Identifier id, std::unique_ptr<Resource> resource, enum Scope = Local);
