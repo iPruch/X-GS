@@ -73,6 +73,7 @@ void ExampleBallEntity::updateThis(const xgs::HiResDuration &dt)
 
 void ExampleBallEntity::drawThis(sf::RenderTarget &target, sf::RenderStates states) const
 {
+	// Draw the graphic representation (which is mCircle here)
 	target.draw(mCircle, states);
 }
 
@@ -80,6 +81,7 @@ void ExampleBallEntity::handleEventThis(const sf::Event& event)
 {
 	//std::cout << "Event reaches ExampleBallEntity" << std::endl;
 	
+	// Handle keyboard events
 	if (event.type == sf::Event::KeyPressed)
 	{
 		// G key - Toggle gravity
@@ -95,8 +97,13 @@ void ExampleBallEntity::handleEventThis(const sf::Event& event)
 			mPhysics.setForce(sf::Vector2f(-9.8f * 20 * mPhysics.getMass(), 0.f));
 		if (event.key.code == sf::Keyboard::Right)
 			mPhysics.setForce(sf::Vector2f(9.8f * 20 * mPhysics.getMass(), 0.f));
-		
 	}
+	
+	/*
+	 You can handle more kinds of events here, but remember first
+	 to propagate them from Game class, at Game::handleEvents method
+	 and from the scene class which owns this entity.
+	 */
 }
 
 void ExampleBallEntity::setBounds(sf::FloatRect bounds)

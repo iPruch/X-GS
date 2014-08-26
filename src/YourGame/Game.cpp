@@ -2,12 +2,15 @@
 
 // Constructor
 Game::Game()
-: mWindow(sf::VideoMode(800, 600), "Window Title", sf::Style::Close)
+/* Configure window settings here. For example, sf::Style::Close
+ creates a window with close button. sf::Style::Fullscreen is
+ another option. See SFML documentation and tutorials for more info */
+: mWindow(sf::VideoMode(720, 480), "YourGame Window Title", sf::Style::Close)
 , mTimeSinceStart(0)
-, mEnableStatistics(false)
+, mEnableStatistics(true)
 , mStatisticsNumFrames(0)
 , mStatisticsUpdateTime(0)
-, mVSync(false)
+, mVSync(true)
 , mSceneManager(mWindow)
 , mFontManager()
 , mEvent()
@@ -44,6 +47,7 @@ void Game::loadGeneralResources()
 void Game::registerScenes()
 {
 	// Register each of your scenes on the Scene Manager like this:
+	// mSceneManager.registerScene<ClassName>(ID from ScenesIdentifiers)
 	mSceneManager.registerScene<ExampleScene>(Scenes::Example);
 	mSceneManager.registerScene<ExampleScene2>(Scenes::Example2);
 }
@@ -119,7 +123,12 @@ void Game::handleEvents()
 				
 				// key pressed
 			case sf::Event::KeyPressed:
-				//std::cout << "KeyPressed event" << std::endl;
+
+				// Pressing Esc will close the game
+				if (mEvent.key.code == sf::Keyboard::Escape)
+					mWindow.close();
+				
+				// Propagate KeyPressed event to the sceneManager
 				mSceneManager.handleEvent(mEvent);
 				break;
 				
@@ -145,8 +154,7 @@ void Game::updateStatistics(const xgs::HiResDuration& elapsedTime)
 		mStatisticsText.setString(
 								  "Frames / Second = " + std::to_string(mStatisticsNumFrames) + "\n" +
 								  "Time / Update = " + std::to_string((float)mStatisticsUpdateTime.count()/mStatisticsNumFrames/1000000) + "ms" + "\n"
-								  + "V-Sync enabled: " + (mVSync ? "Yes" : "No") + "\n"
-								  + "Number of objects: To be implemented"); // + toString(entitiesContainer.count()));
+								  + "V-Sync enabled: " + (mVSync ? "Yes" : "No") + "\n");
 		
 		mStatisticsUpdateTime -= ONE_SECOND;
 		mStatisticsNumFrames = 0;

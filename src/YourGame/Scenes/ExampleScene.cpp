@@ -15,7 +15,7 @@ ExampleScene::ExampleScene(sf::RenderWindow& window, xgs::SceneManager& sceneMan
 	loadResources();
 	
 	mText.setFont(mFontManager.get(Fonts::Sansation, FontManager::Global));
-	mText.setPosition(mWindow.getSize().x / 2, 5.f);
+	mText.setPosition(mWindow.getView().getSize().x / 2.5f, 5.f);
 	mText.setCharacterSize(20);
 	mText.setColor(sf::Color::Black);
 	mText.setString("Example Scene 1\n N - Next scene\n G - No gravity\n Arrows -  gravity direction");
@@ -105,7 +105,7 @@ void ExampleScene::render()
 	mWindow.clear(sf::Color::White);
 	
 	// Set the view (camera) of this scene
-	//mWindow.setView(mSceneView);
+	mWindow.setView(mSceneView);
 	
 	// Draw the scene
 	mWindow.draw(mSceneGraph);
@@ -113,6 +113,7 @@ void ExampleScene::render()
 	// Draw text on top of everything
 	mWindow.draw(mText);
 	
+	// Draw the mFadingRectangle according to transition state
 	switch (mTransitionState) {
 		case none:
 			break;
@@ -146,6 +147,11 @@ void ExampleScene::handleEvent(const sf::Event& event)
 		// Propagate event handling to entities in the scene graph
 		mSceneGraph.handleEvent(event);
 	}
+	
+	/*
+	 You can handle more kinds of events here, but remember first
+	 to propagate them from Game class, at Game::handleEvents method
+	 */
 }
 
 ExampleScene::~ExampleScene()

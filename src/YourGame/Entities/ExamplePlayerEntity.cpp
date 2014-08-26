@@ -107,6 +107,12 @@ void ExamplePlayerEntity::handleRealTimeInput()
 	}
 	
 	// Controls dynamic binding can be also implemented for the player to configure the desired controls, but I'll keep this example simple.
+	
+	/*
+	 You can handle more kinds of events here, but remember first
+	 to propagate them from Game class, at Game::handleEvents method
+	 and from the scene class which owns this entity.
+	 */
 }
 
 void ExamplePlayerEntity::setBounds(sf::FloatRect bounds)

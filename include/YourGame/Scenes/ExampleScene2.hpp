@@ -47,6 +47,7 @@ private:
 	xgs::HiResDuration		mTransitionTime;
 	xgs::HiResDuration		mTransitionDuration;
 	
+	sf::RectangleShape		mBackground;
 	sf::RectangleShape		mFadingRectangle;
 	sf::Text				mText;
 	

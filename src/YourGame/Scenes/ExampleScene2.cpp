@@ -19,7 +19,7 @@ ExampleScene2::ExampleScene2(sf::RenderWindow& window, xgs::SceneManager& sceneM
 	
 	// Some configuration
 	mText.setFont(mFontManager.get(Fonts::Sansation, FontManager::Global));
-	mText.setPosition(mWindow.getSize().x / 2, 5.f);
+	mText.setPosition(mWindow.getView().getSize().x / 2.5f, 5.f);
 	mText.setCharacterSize(20);
 	mText.setColor(sf::Color::White);
 	mText.setString("Example Scene 2 \n B - Back to previous scene \n Arrows/WASD - Move player");
@@ -30,12 +30,19 @@ ExampleScene2::ExampleScene2(sf::RenderWindow& window, xgs::SceneManager& sceneM
 	// Set the rectangle's size. This rectangle is used for the transition effect.
 	mFadingRectangle.setSize(sf::Vector2f(mWindow.getView().getSize().x, mWindow.getView().getSize().y));
 	mFadingRectangle.setFillColor(sf::Color(0, 0, 0, 255));
+	
+	// Set the background
+	mTextureManager.get(Textures::ExampleBackground).setRepeated(true);
+	mBackground.setTexture(&mTextureManager.get(Textures::ExampleBackground));
+	mBackground.setTextureRect(sf::IntRect(0, 0, mWindow.getView().getSize().x, mWindow.getView().getSize().y));
+	mBackground.setSize(sf::Vector2f(mWindow.getView().getSize().x, mWindow.getView().getSize().y));
 }
 
 void ExampleScene2::loadResources()
 {
 	// Load this scene specific resources
 	mTextureManager.load(Textures::ExamplePlayer, "playerShip.gif");
+	mTextureManager.load(Textures::ExampleBackground, "spaceBg.png");
 }
 
 void ExampleScene2::buildScene()
@@ -109,10 +116,20 @@ void ExampleScene2::render()
 {
 	// Clear with blue color to distinguish this scene from the first one
 	mWindow.clear(sf::Color::Blue);
+	
+	// Set the view (camera) of this scene
 	mWindow.setView(mSceneView);
+	
+	// Draw the background
+	mWindow.draw(mBackground);
+	
+	// Draw the scene
 	mWindow.draw(mSceneGraph);
+	
+	// Draw text on top of everything
 	mWindow.draw(mText);
 	
+	// Draw the mFadingRectangle according to transition state
 	switch (mTransitionState) {
 		case none:
 			break;
@@ -146,6 +163,11 @@ void ExampleScene2::handleEvent(const sf::Event& event)
 		// Propagate event handling to entities in the scene graph
 		mSceneGraph.handleEvent(event);
 	}
+	
+	/*
+	 You can handle more kinds of events here, but remember first
+	 to propagate them from Game class, at Game::handleEvents method
+	 */
 }
 
 ExampleScene2::~ExampleScene2()

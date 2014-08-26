@@ -17,6 +17,7 @@ namespace Textures
 	enum ID
 	{
 		ExamplePlayer,
+		ExampleBackground
 	};
 }
 
