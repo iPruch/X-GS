@@ -7,7 +7,6 @@
 #include <SFML/Window/Event.hpp>
 
 #include <X-GS/SceneGraphNode.hpp>
-//#include <X-GS/Scenes/ScenesIdentifiers.hpp>
 
 #include "ScenesIdentifiers.hpp"
 
