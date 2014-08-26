@@ -24,37 +24,37 @@ class Game : private sf::NonCopyable
 {
 	// Methods
 public:
-	explicit								Game();
-	void									runFixedDeltaTime();
-	void									runVariableDeltaTime();
-	void									runSemiFixedDeltaTime();
-	void									runFixedSimulationVariableFramerate();
+	explicit			Game();
+	void				runFixedDeltaTime();
+	void				runVariableDeltaTime();
+	void				runSemiFixedDeltaTime();
+	void				runFixedSimulationVariableFramerate();
 	
 private:
-	void									update(const xgs::HiResDuration& dt);
-	void									render();
-	void									handleEvents();
-	void									updateStatistics(const xgs::HiResDuration& elapsedTime);
+	void				update(const xgs::HiResDuration& dt);
+	void				render();
+	void				handleEvents();
+	void				updateStatistics(const xgs::HiResDuration& elapsedTime);
 	
-	void									loadGeneralResources();
-	void									registerScenes();
+	void				loadGeneralResources();
+	void				registerScenes();
 	
 	// Variables (member / properties)
 private:
-	sf::RenderWindow						mWindow;
-	bool									mVSync;
-	xgs::SceneManager						mSceneManager;
-	sf::Event								mEvent;
+	sf::RenderWindow		mWindow;
+	bool				mVSync;
+	xgs::SceneManager		mSceneManager;
+	sf::Event			mEvent;
 	
 	// Resources managers
-	FontManager								mFontManager;
+	FontManager			mFontManager;
 	
 	// Statistics
-	bool									mEnableStatistics;
-	xgs::HiResDuration						mTimeSinceStart; // Accumulator of all time
-	sf::Text								mStatisticsText;
-	xgs::HiResDuration						mStatisticsUpdateTime;
-	std::size_t								mStatisticsNumFrames;
+	bool				mEnableStatistics;
+	xgs::HiResDuration		mTimeSinceStart; // Accumulator of all time
+	sf::Text			mStatisticsText;
+	xgs::HiResDuration		mStatisticsUpdateTime;
+	std::size_t			mStatisticsNumFrames;
 };
 
 #endif // YOURGAME_GAME_HPP
