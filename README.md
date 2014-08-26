@@ -96,4 +96,4 @@ The best way to learn how to use X-GS is to look into its files. They have comme
 
 The project comes with some example scenes and entities so that you can see a working project in action. You may want to look at them when creating your own entities or scenes. You can also delete them if you wish (remember deleting also any related ID from the previous Identifiers headers).
 
-I will give a more detailed tutorial in the future. Now I'm a little bussy doing a game example and the report document of my end-of-degree project. Please, wish me luck! :3
+I will give a more detailed tutorial in the future. Now I'm a little bussy doing an [example game](https://github.com/iPruch/X-GS-Example-Game) and the report document of my end-of-degree project. Please, wish me luck! :3
