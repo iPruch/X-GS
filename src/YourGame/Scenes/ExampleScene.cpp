@@ -1,5 +1,4 @@
 #include "ExampleScene.hpp"
-//#include <iostream>
 
 ExampleScene::ExampleScene(sf::RenderWindow& window, xgs::SceneManager& sceneManager)
 : Scene(window, sceneManager)
@@ -14,16 +13,16 @@ ExampleScene::ExampleScene(sf::RenderWindow& window, xgs::SceneManager& sceneMan
 	// Load resources here (RAII)
 	loadResources();
 	
+	// Build the scene graph
+	buildScene();
+	
+	// Configure text
 	mText.setFont(mFontManager.get(Fonts::Sansation, FontManager::Global));
 	mText.setPosition(mWindow.getView().getSize().x / 2.5f, 5.f);
 	mText.setCharacterSize(20);
 	mText.setColor(sf::Color::Black);
 	mText.setString("Example Scene 1\n N - Next scene\n G - No gravity\n Arrows -  gravity direction");
-	
-	
-	// Build the scene graph
-	buildScene();
-	
+
 	// Begin in transition
 	mTransitionState = in;
 	
@@ -54,6 +53,7 @@ void ExampleScene::buildScene()
 
 void ExampleScene::update(const xgs::HiResDuration &dt)
 {
+	// Update the scene graph
 	mSceneGraph.update(dt);
 	
 	// Update transition
