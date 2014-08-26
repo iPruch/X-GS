@@ -1,5 +1,5 @@
-#ifndef XGS_SCENESIDENTIFIERS_HPP
-#define XGS_SCENESIDENTIFIERS_HPP
+#ifndef YOURGAME_SCENESIDENTIFIERS_HPP
+#define YOURGAME_SCENESIDENTIFIERS_HPP
 
 namespace Scenes {
 	
@@ -10,4 +10,4 @@ namespace Scenes {
 	};
 } // namespace Scene
 
-#endif // XGS_SCENESIDENTIFIERS_HPP
+#endif // YOURGAME_SCENESIDENTIFIERS_HPP
