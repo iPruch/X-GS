@@ -32,7 +32,7 @@ namespace Fonts
 
 // Create new enumerations for new resource types here
 
-typedef xgs::ResourceManager<sf::Texture, Textures::ID>	TextureManager;
+typedef xgs::ResourceManager<sf::Texture, Textures::ID>		TextureManager;
 typedef xgs::ResourceManager<sf::Font, Fonts::ID>		FontManager;
 // Create new typedefs for new resource types here
 
