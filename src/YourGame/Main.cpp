@@ -5,13 +5,13 @@
 
 int main()
 {
-    // General try-catch for unhandled exceptions in game
+	// General try-catch for unhandled exceptions in game
 	try
 	{
-        // Simply instantiate the game and run it
+		// Simply instantiate the game and run it
 		Game game;
         
-        // Choose from these run methods according to your requirements
+		// Choose from these run methods according to your requirements
 		//game.runFixedDeltaTime();
 		//game.runVariableDeltaTime();
 		game.runSemiFixedDeltaTime();
