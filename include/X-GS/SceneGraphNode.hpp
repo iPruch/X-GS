@@ -22,36 +22,36 @@ namespace xgs {
 		
 		// Methods
 	public:
-		SceneGraphNode();
-		virtual					~SceneGraphNode();
+						SceneGraphNode();
+		virtual				~SceneGraphNode();
 		
-		void					attachChild(NodePtr child);
-		NodePtr					detachChild(const SceneGraphNode& node);
-		void					destroy();
+		void				attachChild(NodePtr child);
+		NodePtr				detachChild(const SceneGraphNode& node);
+		void				destroy();
 		
-		void					update(const HiResDuration& dt);
-		void					draw(sf::RenderTarget& target, sf::RenderStates states) const;
-		void					handleEvent(const sf::Event& event);
+		void				update(const HiResDuration& dt);
+		void				draw(sf::RenderTarget& target, sf::RenderStates states) const;
+		void				handleEvent(const sf::Event& event);
 		
 		sf::Vector2f			getWorldPosition() const;
 		sf::Transform			getWorldTransform() const;
 		
 	private:
 		virtual void			updateThis(const HiResDuration& dt);
-		void					updateChildren(const HiResDuration& dt);
+		void				updateChildren(const HiResDuration& dt);
 		
 		virtual void			handleEventThis(const sf::Event& event);
-		void					handleEventChildren(const sf::Event& event);
+		void				handleEventChildren(const sf::Event& event);
 		
 		virtual void			drawThis(sf::RenderTarget& target, sf::RenderStates states) const;
-		void					drawChildren(sf::RenderTarget& target, sf::RenderStates states) const;
+		void				drawChildren(sf::RenderTarget& target, sf::RenderStates states) const;
 		
 		// Variables (member / properties)
 	public:
 		sf::Transformable		mTransformable;
 		
 	private:
-		std::vector<NodePtr>	mChildren;
+		std::vector<NodePtr>		mChildren;
 		SceneGraphNode*			mParent;
 	};
     
