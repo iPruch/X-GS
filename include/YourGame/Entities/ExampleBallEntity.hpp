@@ -15,14 +15,14 @@
 class ExampleBallEntity : public xgs::Entity
 {
 public:
-	ExampleBallEntity(sf::FloatRect bounds);
-	virtual					~ExampleBallEntity();
+					ExampleBallEntity(sf::FloatRect bounds);
+	virtual				~ExampleBallEntity();
 	
 	virtual void			updateThis(const xgs::HiResDuration& dt);
 	virtual void			drawThis(sf::RenderTarget& target, sf::RenderStates states) const;
 	virtual void			handleEventThis(const sf::Event& event);
 	
-	void					setBounds(sf::FloatRect bounds);
+	void				setBounds(sf::FloatRect bounds);
 	
 private:
 	// Components
