@@ -3,7 +3,7 @@ X-GS (Cross-platform Game Skeleton)
 
 This is a brief introducction and description of what is X-GS. I'll keep updating this Readme file to clarify things, give details, instructions, motivation behind this project, etc.
 
-Continue reading or jump to the [Setup tutorial](https://github.com/iPruch/X-GS/blob/master/README.md#setup-tutorial).
+Continue reading or jump to the [Setup tutorial](#setup-tutorial).
 
 
 ### What is X-GS?
