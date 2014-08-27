@@ -65,13 +65,11 @@ void ExamplePlayerEntity::drawThis(sf::RenderTarget &target, sf::RenderStates st
 
 void ExamplePlayerEntity::handleEventThis(const sf::Event& event)
 {
-	//std::cout << "Event reaches ExampleBallEntity" << std::endl;
+	//std::cout << "Event reaches ExamplePlayerEntity" << std::endl;
 	
 	if (event.type == sf::Event::KeyPressed)
 	{
-		// G key - Switch gravity (up/down)
-		if (event.key.code == sf::Keyboard::G)
-			mPhysics.setForce(sf::Vector2f(0.f, mPhysics.getForce().y * (-1.f)));
+		// No keyboard input events defined for this entity
 	}
 }
 
