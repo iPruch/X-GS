@@ -29,17 +29,16 @@ private:
 	
 	// Methods
 public:
-	explicit			ExampleScene2(sf::RenderWindow& window, xgs::SceneManager& sceneManager);
-					~ExampleScene2();
+	explicit				ExampleScene2(sf::RenderWindow& window, xgs::SceneManager& sceneManager);
+							~ExampleScene2();
 	
-public:
-	virtual void			update(const xgs::HiResDuration& dt);
-	virtual void			render();
-	virtual void			handleEvent(const sf::Event& event);
+	void					update(const xgs::HiResDuration& dt) override;
+	void					render() override;
+	void					handleEvent(const sf::Event& event) override;
 	
 private:
-	virtual void			buildScene();
-	virtual void			loadResources();
+	void					buildScene() override;
+	void					loadResources() override;
 	
 	// Variables (member / properties)
 private:
@@ -49,9 +48,9 @@ private:
 	
 	sf::RectangleShape		mBackground;
 	sf::RectangleShape		mFadingRectangle;
-	sf::Text			mText;
+	sf::Text				mText;
 	
-	FontManager			mFontManager;
+	FontManager				mFontManager;
 	TextureManager			mTextureManager;
 };
 

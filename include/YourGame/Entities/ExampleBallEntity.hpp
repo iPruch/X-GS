@@ -15,20 +15,20 @@
 class ExampleBallEntity : public xgs::Entity
 {
 public:
-					ExampleBallEntity(sf::FloatRect bounds);
+						ExampleBallEntity(sf::FloatRect bounds);
 	virtual				~ExampleBallEntity();
 	
-	virtual void			updateThis(const xgs::HiResDuration& dt);
-	virtual void			drawThis(sf::RenderTarget& target, sf::RenderStates states) const;
-	virtual void			handleEventThis(const sf::Event& event);
+	void				updateThis(const xgs::HiResDuration& dt) override;
+	void				drawThis(sf::RenderTarget& target, sf::RenderStates states) const override;
+	void				handleEventThis(const sf::Event& event) override;
 	
 	void				setBounds(sf::FloatRect bounds);
 	
 private:
 	// Components
-	sf::CircleShape			mCircle;
-	sf::FloatRect			mBounds;
-	xgs::PhysicState		mPhysics;
+	sf::CircleShape		mCircle;
+	sf::FloatRect		mBounds;
+	xgs::PhysicState	mPhysics;
 };
 
 #endif // YOURGAME_EXAMPLEBALLENTITY_HPP

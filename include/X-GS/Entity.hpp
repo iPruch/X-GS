@@ -21,9 +21,9 @@ namespace xgs {
 		Entity() {}
 		virtual					~Entity() {}
 		
-		virtual void			updateThis(const HiResDuration& dt) = 0;
-		virtual void			drawThis(sf::RenderTarget& target, sf::RenderStates states) const = 0;
-		virtual void			handleEventThis(const sf::Event& event) = 0;
+		virtual void			updateThis(const HiResDuration& dt) override = 0;
+		virtual void			drawThis(sf::RenderTarget& target, sf::RenderStates states) const override = 0;
+		virtual void			handleEventThis(const sf::Event& event) override = 0;
 		
 		// Variables (member / properties)
 	private:

@@ -21,23 +21,23 @@
 class ExamplePlayerEntity : public xgs::Entity, public sf::Sprite
 {
 public:
-					ExamplePlayerEntity(sf::FloatRect bounds, sf::Texture& texture);
-	virtual				~ExamplePlayerEntity();
+							ExamplePlayerEntity(sf::FloatRect bounds, sf::Texture& texture);
+	virtual					~ExamplePlayerEntity();
 	
-	virtual void			updateThis(const xgs::HiResDuration& dt);
-	virtual void			drawThis(sf::RenderTarget& target, sf::RenderStates states) const;
-	virtual void			handleEventThis(const sf::Event& event);
+	void					updateThis(const xgs::HiResDuration& dt) override;
+	void					drawThis(sf::RenderTarget& target, sf::RenderStates states) const override;
+	void					handleEventThis(const sf::Event& event) override;
 	
-	void				setBounds(sf::FloatRect bounds);
+	void					setBounds(sf::FloatRect bounds);
 	
 private:
-	void				handleRealTimeInput();
+	void					handleRealTimeInput();
 	
 private:
 	// Components
 	xgs::PhysicState		mPhysics;
 	sf::FloatRect			mBounds;
-	float				mSpeed;
+	float					mSpeed;
 };
 
 #endif // YOURGAME_EXAMPLEPLAYERENTITY_HPP
