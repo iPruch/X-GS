@@ -8,6 +8,8 @@
 #include <X-GS/PhysicState.hpp>
 #include <X-GS/Integrator.hpp>
 
+#include <iostream>
+
 /*
  Derived class from xgs::Entity and sf::Sprite
  

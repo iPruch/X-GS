@@ -101,7 +101,11 @@ void ExamplePlayerEntity::handleRealTimeInput()
 		float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
 		float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
 		
-		mPhysics.setVelocity(sf::Vector2f(x * mSpeed, y * mSpeed));
+		// If axis don't reach a minimum threshold, movement to 0
+		x = abs(x) > 10 ? x : 0;
+		y = abs(y) > 10 ? y : 0;
+		
+		mPhysics.setVelocity(sf::Vector2f(x * mSpeed / 100.f, y *  mSpeed / 100.f)); // 100 is max value of axis position
 	}
 	
 	// Controls dynamic binding can be also implemented for the player to configure the desired controls, but I'll keep this example simple.
