@@ -8,6 +8,7 @@
 #include <X-GS/Time.hpp>
 #include <X-GS/Scene.hpp>
 #include <X-GS/Entity.hpp>
+//#include <X-GS/Scenes/ScenesIdentifiers.hpp>
 
 #include <map>
 
@@ -19,24 +20,28 @@ namespace xgs {
     {
 		// Methods
 	public:
-		explicit						SceneManager(sf::RenderWindow& window);
-									~SceneManager();
+		explicit				SceneManager(sf::RenderWindow& window);
+		~SceneManager();
 		
 		template <typename T>
-		void							registerScene(Scenes::ID stateID);
-		void							loadScene(Scenes::ID sceneID);
+		void					registerScene(Scenes::ID stateID);
+		void					loadScene(Scenes::ID sceneID);
 		
-		void                    				update(const HiResDuration& dt);
-		void                    				render();
-		void							handleEvent(const sf::Event& event);
+		void                    update(const HiResDuration& dt);
+		void                    render();
+		void					handleEvent(const sf::Event& event);
         
 	private:
-		Scene::ScenePtr						createScene(Scenes::ID sceneID);
+		Scene::ScenePtr			createScene(Scenes::ID sceneID);
+		void					switchScene();
 		
 		// Variables (member / properties)
 	private:
-		sf::RenderWindow&					mWindow;
-		Scene::ScenePtr						currentScene;
+		sf::RenderWindow&		mWindow;
+		Scene::ScenePtr			mCurrentScene;
+		Scenes::ID				mNextScene;
+		bool					mSceneChangeRequest;
+		
 		std::map<Scenes::ID, std::function<Scene::ScenePtr()>>	mFactories;
     };
 	

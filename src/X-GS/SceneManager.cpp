@@ -5,15 +5,19 @@ namespace xgs {
 	
 	SceneManager::SceneManager(sf::RenderWindow& window)
 	: mWindow(window)
-	, currentScene()
+	, mCurrentScene()
+	, mNextScene()
+	, mSceneChangeRequest(false)
 	{
 		// Load resources here (RAII)
+		
 	}
 	
+	// Save next scene ID and request to change the scene
 	void SceneManager::loadScene(Scenes::ID sceneID)
 	{
-		currentScene.reset();
-		currentScene = std::move(createScene(sceneID));
+		mNextScene = sceneID;
+		mSceneChangeRequest = true;
 	}
 	
 	Scene::ScenePtr SceneManager::createScene(Scenes::ID sceneID)
@@ -24,19 +28,37 @@ namespace xgs {
 		return found->second();
 	}
 	
+	// Change the scene when it is safe
+	void SceneManager::switchScene()
+	{
+		mCurrentScene.reset();
+		mCurrentScene = std::move(createScene(mNextScene));
+		mSceneChangeRequest = false;
+	}
+	
 	void SceneManager::update(const HiResDuration &dt)
 	{
-		currentScene->update(dt);
+		// If a scene change is requested, don't update (for safety)
+		if (!mSceneChangeRequest)
+			mCurrentScene->update(dt);
+		
+		// Perform the scene change when requested
+		if (mSceneChangeRequest)
+			switchScene();
 	}
 	
 	void SceneManager::render()
 	{
-		currentScene->render();
+		// If a scene change is requested, don't render (for safety)
+		if (!mSceneChangeRequest)
+			mCurrentScene->render();
 	}
 	
 	void SceneManager::handleEvent(const sf::Event &event)
 	{
-		currentScene->handleEvent(event);
+		// If a scene change is requested, don't handle events (for safety)
+		if (!mSceneChangeRequest)
+			mCurrentScene->handleEvent(event);
 	}
 	
 	SceneManager::~SceneManager()
